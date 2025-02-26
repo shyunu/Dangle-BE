@@ -1,0 +1,97 @@
+/* Progress Bar */
+
+.join-progress-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Progress 단계 */
+.progress-step {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #e3e3e3;
+  background-color: #e3e3e3;
+  position: relative;
+  z-index: 2;
+}
+.circle > svg {
+  width: 100%;
+  height: 95%;
+  margin-bottom: 5px;
+  margin-left: 1px;
+}
+
+/* 활성화된 단계 */
+.progress-step.active .circle {
+  border-color: #edafb8;
+  background-color: #edafb8;
+  width: 18px;
+  height: 18px;
+}
+
+/* 활성화된 원의 바깥 테두리 */
+.progress-step.active .circle::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 3px solid #edafb8;
+  background-color: transparent;
+  z-index: 1;
+}
+
+/* 선 */
+.progress-line {
+  width: 190px;
+  height: 5px;
+  background-color: #e3e3e3;
+}
+
+/* Progress 단계 이름 */
+.progress-name-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 30px;
+  text-align: center;
+  font-size: 12px;
+  color: #777;
+  margin: 10px 0px;
+  gap: 140px;
+}
+/* Progress 단계 이름 */
+.progress-name-container > p {
+  width: 100px;
+  margin: 0;
+}
+
+.progress-name-active {
+  color: black;
+  font-weight: 300;
+}
+
+/* 완료된 항목 */
+.progress-complete .circle {
+  border-color: #edafb8;
+  background-color: #edafb8;
+  width: 24px;
+  height: 24px;
+}

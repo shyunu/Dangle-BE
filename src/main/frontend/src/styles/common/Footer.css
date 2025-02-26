@@ -1,0 +1,44 @@
+.footerContainer {
+  background-color: #fff1e6;
+  position: fixed;
+  z-index: 500;
+  min-width: 320px;
+  max-width: 640px;
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.tabContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 35px;
+}
+
+.home,
+.search,
+.heart,
+.calendar,
+.account {
+  width: 35px;
+  height: 35px;
+  color: black;
+  cursor: pointer;
+}
+
+.home,
+.search,
+.heart,
+.account {
+  width: 40px;
+  height: 40px;
+  margin-top: 5px;
+}

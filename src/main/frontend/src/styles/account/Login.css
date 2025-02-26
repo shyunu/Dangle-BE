@@ -1,0 +1,108 @@
+/* Login.css */
+
+.loginContainer {
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fff;
+  font-family: "Suit", sans-serif;
+}
+
+.loginContainer > div:nth-of-type(1) {
+  font-size: 30px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.loginContainer > div:nth-of-type(2) {
+  font-size: 18px;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+}
+
+.login-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 400px;
+  margin-bottom: 15px;
+}
+
+.login-info p {
+  font-size: 13px;
+  color: #000;
+  margin: 0;
+}
+
+/* 입력 필드 스타일 */
+.login-info input {
+  font-size: 16px;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  outline: none;
+  margin-bottom: 10px;
+  height: 40px;
+  width: 100%;
+}
+
+/* 입력 필드에 포커스 시 효과 */
+.login-info input:focus {
+  border-color: #a8caba;
+  box-shadow: 0 0 8px rgba(168, 202, 186, 0.5);
+}
+
+/* 로그인버튼 */
+.loginButton > button {
+  width: 400px;
+  height: 40px;
+  margin-bottom: 15px;
+  border-style: none;
+  border-radius: 5px;
+  background-color: #a8caba;
+  letter-spacing: 5px;
+}
+.loginButton > button:hover {
+  cursor: pointer;
+}
+
+/* 회원가입, 아이디/비밀번호찾기 글씨 */
+.textWrap {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-top: 10px;
+  gap: 20px;
+  text-align: center;
+}
+.textWrap > a {
+  text-decoration: none;
+  color: black;
+  width: 50%;
+}
+
+/* 로그인 sns 연동 */
+.snsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.snsContainer > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #e3e3e3;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  align-items: center;
+  cursor: pointer;
+}

@@ -1,0 +1,107 @@
+.join-container {
+  width: 100%;
+  margin: 80px 0px 100px 0px;
+  padding: 30px;
+  overflow-y: auto; /* 내부 스크롤 활성화 */
+}
+.join-container input:focus {
+  border-color: #a8caba;
+  box-shadow: 0 0 8px rgba(168, 202, 186, 0.5);
+}
+
+.join-text-wrap {
+  width: 500px;
+}
+
+/* 회원가입 타이틀 */
+.join-title {
+  font-size: 24px;
+  font-weight: 300;
+  margin-bottom: 10px;
+}
+
+/* 경계선 */
+.join-border-line {
+  border: 1px solid #e3e3e3;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* 약관 안내 문구 */
+.join-text1 {
+  font-weight: 200;
+  font-size: 18px;
+  margin: 3px 14px;
+}
+.join-text2 {
+  font-weight: 100;
+  font-size: 12px;
+  margin: 0px 14px;
+}
+
+/* 약관 동의란 */
+.join-agree-content {
+  width: 450px;
+  margin-top: 60px;
+}
+.join-agree-content p {
+  font-size: 13px;
+  color: #777;
+}
+
+.join-agree-option {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  cursor: pointer;
+  height: 30px;
+  align-items: center;
+  margin: 0;
+}
+.join-agree-all {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  cursor: pointer;
+  height: 30px;
+  align-items: center;
+  font-weight: 300;
+  margin-bottom: 10px;
+}
+.join-agree-all > .icon-agree-all {
+  margin: 0;
+  width: 17px;
+  height: 17px;
+  margin-right: 2px;
+}
+.join-agree-all > p {
+  margin: 0;
+  margin-left: 8px;
+  color: black;
+  font-size: 15px;
+  padding-top: 2px;
+}
+.agree-check-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  flex: 3;
+}
+.agree-check-text > p {
+  margin-left: 10px;
+  flex: 10;
+}
+
+/* 구분선 */
+.join-agree-border-line {
+  border: 1px solid #e3e3e3;
+  width: 100%;
+}
+
+/* 버튼 */
+.join-agree-button-wrap {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 50px;
+}

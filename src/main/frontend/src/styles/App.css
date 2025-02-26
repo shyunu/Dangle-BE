@@ -1,0 +1,71 @@
+/* App.css */
+
+/* Light */
+@font-face {
+    font-family: "Suit";
+    src: url("../../public/fonts/SUIT-Light.ttf");
+    font-weight: 100;
+    font-style: normal;
+}
+
+/* Regular */
+@font-face {
+    font-family: "Suit";
+    src: url("../../public/fonts/SUIT-Regular.ttf");
+    font-weight: 200;
+    font-style: normal;
+}
+
+/* Medium */
+@font-face {
+    font-family: "Suit";
+    src: url("../../public/fonts/SUIT-Medium.ttf");
+    font-weight: 300;
+    font-style: normal;
+}
+
+/* SemiBold */
+@font-face {
+    font-family: "Suit";
+    src: url("../../public/fonts/SUIT-SemiBold.ttf");
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Bold */
+@font-face {
+    font-family: "Suit";
+    src: url("../../public/fonts/SUIT-Bold.ttf");
+    font-weight: 500;
+    font-style: normal;
+}
+
+.App {
+    max-width: 640px;
+    height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    background-color: #fff;
+    font-weight: 200;
+}
+* {
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Suit", sans-serif;
+    font-size: 13px;
+    font-weight: 200;
+}
+body {
+    overflow-y: scroll; /* 스크롤 기능 유지 */
+    -ms-overflow-style: none; /* IE, Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+::-webkit-scrollbar {
+    width: 0; /* Chrome, Safari, Edge */
+    background: transparent;
+}
