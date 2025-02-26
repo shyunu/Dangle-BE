@@ -1,0 +1,109 @@
+.profile-mypage-container {
+  width: 100%;
+  margin: 80px 0px;
+  padding: 30px;
+  overflow-y: auto;
+}
+.profile-mypage-title {
+  height: 30px;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 30px;
+  height: 50px;
+  line-height: 50px;
+  padding: 0px 30px;
+}
+
+.profile-border {
+  border: 1px solid #e3e3e3;
+  width: 90%;
+}
+
+/* 프로필사진 */
+.profile-image-wrap {
+  display: flex;
+  flex-direction: row;
+  padding: 20px 0px;
+  width: 90%;
+}
+.profile-image-wrap img,
+.profile-image-default {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* 로그인/로그아웃버튼 */
+.profile-log-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.profile-log-btn button {
+  width: 100px;
+  height: 30px;
+  line-height: 12px;
+  font-size: 12px;
+  font-weight: 100;
+}
+
+/* 프로필이름 */
+.profile-image-wrap .profile-name {
+  font-size: 12px;
+  font-weight: 100;
+  color: #777;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  gap: 15px;
+}
+.profile-image-wrap .profile-name p {
+  margin: 0;
+}
+.profile-name-bold,
+.profile-intro-comment {
+  display: flex;
+  margin: 0;
+}
+.profile-name-bold > p:nth-of-type(1) {
+  font-size: 15px;
+  font-weight: 300;
+  color: #000;
+}
+.profile-name-bold > p:nth-of-type(2) {
+  line-height: 22px;
+  margin-left: 3px;
+}
+.profile-intro-comment svg {
+  margin-left: 3px;
+  width: 14px;
+  height: 14px;
+  color: #edafb8;
+}
+
+/* styles/customAccordion.css */
+.custom-accordion-profile {
+  width: 90%;
+  margin-top: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+.custom-accordion-profile .accordion-button {
+  /* background-color: rgba(237, 175, 184, 0.3) !important; */
+  background-color: #fff !important;
+
+  color: black !important; /* 글자색 검정 */
+}
+
+.custom-accordion-profile .accordion-button:not(.collapsed) {
+  background-color: rgba(237, 175, 184, 0.3) !important;
+  color: black !important;
+  box-shadow: none !important; /* 기본 그림자 제거 */
+}
+.custom-accordion-profile .accordion-button:focus {
+  box-shadow: none !important; /* 파란색 border 제거 */
+  border-color: transparent !important; /* 클릭 후 테두리 없애기 */
+}
+

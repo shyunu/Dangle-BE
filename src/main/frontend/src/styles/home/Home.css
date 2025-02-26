@@ -1,0 +1,95 @@
+
+.slick-prev:before,
+.slick-next:before {
+  color: white !important;
+}
+.slick-prev {
+  position: absolute;
+  left: 40px !important;
+  z-index: 300;
+}
+.slick-next {
+  position: absolute;
+  left: 530px;
+  z-index: 300;
+}
+
+.main-home-container {
+  /* 공통컨텐츠 */
+  width: 100%;
+  margin: 80px 0px;
+  padding: 30px;
+  overflow-y: auto; /* 내부 스크롤 활성화 */
+}
+
+/* event - slider */
+.home-slider-container {
+  width: 100%;
+  height: 30%;
+  margin-top: 10px;
+  background-color: #fff;
+}
+.home-slider-container div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.home-slider-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  cursor: pointer;
+}
+
+/* store - card */
+.store-slider-container {
+  width: 100%;
+  height: 25%;
+  min-height: 225px;
+  margin-top: 30px;
+}
+.store-slider-container > p {
+  font-size: 16px;
+  margin: 0px 20px;
+}
+
+/* 슬라이드 간 간격 추가 */
+.slick-track {
+  display: flex !important;
+  gap: 25px; /* 원하는 간격 설정 */
+  /* width: 5050px; */
+}
+
+.store-card {
+  background: white;
+  padding: 10px;
+  margin: 5px 0px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.store-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.store-card p {
+  font-size: 12px;
+}
+.store-card p:nth-of-type(1) {
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+/* 스토어간 간격 */
+.store-gap {
+  margin-top: 100px;
+}

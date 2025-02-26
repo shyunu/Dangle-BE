@@ -1,0 +1,160 @@
+/* 회원가입폼 */
+.join-form-container {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  height: 500px;
+}
+.join-form-container p {
+  font-size: 13px;
+  height: 20px;
+  margin: 5px 0px 2px 5px;
+}
+.join-form-container input:focus {
+  outline: none;
+  border-color: #edafb8;
+  box-shadow: 0 0 8px rgba(237, 175, 184, 0.5);
+}
+
+/* input + button */
+.join-form-input-wrap {
+  display: flex;
+  gap: 5px;
+  justify-content: space-between;
+}
+.join-form-input-wrap > input {
+  width: 345px;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  height: 30px;
+}
+.join-form-input-wrap:nth-of-type(1) > input {
+  width: 250px;
+}
+.join-form-pw-info {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  font-weight: 100;
+  color: #777;
+  margin-left: 3px;
+  height: 20px;
+}
+.join-form-pw-info > svg {
+  width: 15px;
+  height: 15px;
+  margin-top: 2px;
+}
+.join-form-pw-info > p {
+  margin-top: 10px;
+  font-size: 10px;
+}
+
+/* 생년월일 + 성별 */
+.join-form-birth-gender-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.join-form-birth {
+  flex: 5;
+  display: flex;
+  flex-direction: column;
+}
+.join-form-birth input {
+  width: 170px;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  height: 30px;
+  padding-left: 5px;
+  color: #777;
+  font-weight: 200;
+  font-size: 12px;
+}
+.join-form-birth svg {
+  width: 35px;
+  height: 35px;
+}
+.calendar-wrap {
+  display: flex;
+  flex-direction: row;
+}
+
+.join-form-gender {
+  display: flex;
+  flex-direction: column;
+  flex: 5;
+}
+.join-form-gender > p {
+  margin-left: 15px;
+}
+.join-form-gender .gender-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 5px;
+  align-items: center;
+  padding: 0px 15px;
+  width: 100%;
+}
+.join-form-gender .gender-wrap input {
+  width: 20px;
+  height: 20px;
+}
+.join-form-gender .gender-wrap input:checked {
+  accent-color: black;
+}
+.join-form-gender .gender-wrap p {
+  line-height: 10px;
+  margin: 10px 15px 0px 0px;
+}
+
+/* email */
+.email-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0px;
+}
+.email-wrap > input {
+  width: 110px;
+}
+.email-wrap > svg {
+  width: 15px;
+  height: 18px;
+}
+.email-wrap > select {
+  width: 100px;
+  height: 100%;
+  border-color: #e3e3e3;
+  border-radius: 5px;
+  font-size: 12px;
+  color: #777;
+  font-weight: 200;
+  font-size: 12px;
+}
+
+/* address */
+.address-search-wrap {
+  width: 99%;
+}
+.address-detail {
+  margin-top: 3px;
+}
+
+/* 구분선 */
+.join-form-border-line {
+  border: 1px solid #fff;
+  width: 100%;
+}
+
+/* 버튼 */
+.join-form-button-wrap {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 50px;
+}
