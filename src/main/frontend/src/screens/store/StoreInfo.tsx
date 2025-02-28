@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../../styles/store/StoreInfo.css";
-import Slider from "react-slick";
+import Slider from "../../components/Slider";
 import { IoIosArrowBack } from "react-icons/io";
 import { FaRegHeart } from "react-icons/fa6";
 import { FaRegCheckCircle, FaRegCircle, FaStar, FaStarHalf, FaRegStar } from "react-icons/fa";
@@ -114,15 +114,15 @@ const StoreInfo: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState("전체");
     const [selectedDesigner, setSelectedDesigner] = useState<number | null>(null);
 
-    const sliderSettings = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-    };
+    // const sliderSettings = {
+    //   dots: false,
+    //   infinite: true,
+    //   speed: 500,
+    //   slidesToShow: 1,
+    //   slidesToScroll: 1,
+    //   autoplay: true,
+    //   autoplaySpeed: 3000,
+    // };
 
     const filteredMenu =
         selectedCategory === "전체" ? groomingMenu : groomingMenu.filter((item) => item.category === selectedCategory);
@@ -164,13 +164,7 @@ const StoreInfo: React.FC = () => {
 
             {/* image */}
             <div className="store-image-wrap">
-                {/*<Slider {...sliderSettings}>*/}
-                {/*    {imageData.map((store) => (*/}
-                {/*        <div key={store.no} className="image">*/}
-                {/*            <img src={store.imageUrl} />*/}
-                {/*        </div>*/}
-                {/*    ))}*/}
-                {/*</Slider>*/}
+                <Slider imageData={imageData} />
             </div>
 
             {/* menu tab */}
