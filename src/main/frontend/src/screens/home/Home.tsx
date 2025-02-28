@@ -1,8 +1,21 @@
 import React from "react";
 import "../../styles/home/Home.css";
-import Slider from "react-slick";
+import Slider from "../../components/Slider";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+interface EventBanner {
+    no: number;
+    imageUrl: string;
+}
+const eventImage: EventBanner[] = [
+    { no: 1, imageUrl: "/image/slide5.jpg" },
+    { no: 2, imageUrl: "/image/slide2.jpg" },
+    { no: 3, imageUrl: "/image/slide3.jpg" },
+    { no: 4, imageUrl: "/image/slide4.jpg" },
+    { no: 5, imageUrl: "/image/slide1.jpg" },
+    { no: 6, imageUrl: "/image/slide6.jpg" },
+];
 
 interface Store {
     no: number;
@@ -23,7 +36,6 @@ const storeData: Store[] = [
 ];
 
 const Home: React.FC = () => {
-
     const sliderSettings = {
         dots: true,
         infinite: true,
@@ -48,68 +60,22 @@ const Home: React.FC = () => {
         <div className="main-home-container">
             {/* 이벤트 배너 */}
             <div className="home-slider-container">
-                {/*<Slider {...sliderSettings}>*/}
-                {/*    <div>*/}
-                {/*        <img src="./image/slide5.jpg" alt="강아지5" />*/}
-                {/*    </div>*/}
-                {/*    <div>*/}
-                {/*        <img src="./image/slide2.jpg" alt="강아지2" />*/}
-                {/*    </div>*/}
-                {/*    <div>*/}
-                {/*        <img src="./image/slide3.jpg" alt="강아지3" />*/}
-                {/*    </div>*/}
-                {/*    <div>*/}
-                {/*        <img src="./image/slide4.jpg" alt="강아지4" />*/}
-                {/*    </div>*/}
-                {/*    <div>*/}
-                {/*        <img src="./image/slide1.jpg" alt="강아지1" />*/}
-                {/*    </div>*/}
-                {/*    <div>*/}
-                {/*        <img src="./image/slide6.jpg" alt="강아지6" />*/}
-                {/*    </div>*/}
-                {/*</Slider>*/}
+                <Slider eventImage={eventImage} />
             </div>
-
             {/* 신규오픈매장 */}
             <div className="store-slider-container">
                 <p>신규 오픈 매장</p>
-                {/*<Slider {...storeSliderSettings}>*/}
-                {/*    {storeData.map((store) => (*/}
-                {/*        <div key={store.no} className="store-card">*/}
-                {/*            <img src={store.imageUrl} alt={store.name} />*/}
-                {/*            <p>{store.name}</p>*/}
-                {/*            <p>{store.location}</p>*/}
-                {/*        </div>*/}
-                {/*    ))}*/}
-                {/*</Slider>*/}
+                <Slider />
             </div>
-
             {/* 당일예약 가능한 매장 */}
             <div className="store-slider-container store-gap">
                 <p>당일예약 가능한 매장</p>
-                {/*<Slider {...storeSliderSettings}>*/}
-                {/*    {storeData.map((store) => (*/}
-                {/*        <div key={store.no} className="store-card">*/}
-                {/*            <img src={store.imageUrl} alt={store.name} />*/}
-                {/*            <p>{store.name}</p>*/}
-                {/*            <p>{store.location}</p>*/}
-                {/*        </div>*/}
-                {/*    ))}*/}
-                {/*</Slider>*/}
+                <Slider />
             </div>
-
             {/* 재예약 많은 매장 */}
             <div className="store-slider-container store-gap">
                 <p>재예약 많은 매장</p>
-                {/*<Slider {...storeSliderSettings}>*/}
-                {/*    {storeData.map((store) => (*/}
-                {/*        <div key={store.no} className="store-card">*/}
-                {/*            <img src={store.imageUrl} alt={store.name} />*/}
-                {/*            <p>{store.name}</p>*/}
-                {/*            <p>{store.location}</p>*/}
-                {/*        </div>*/}
-                {/*    ))}*/}
-                {/*</Slider>*/}
+                <Slider />
             </div>
         </div>
     );
