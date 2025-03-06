@@ -1,16 +1,135 @@
-import React from "react";
+import React, {useState} from "react";
 import "../../styles/join/JoinForm.css";
 import ProgressBar from "../../components/ProgressBar";
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { MdAlternateEmail } from "react-icons/md";
+import axios from "axios";
+
+interface AccountVO {
+    userId?: number;
+    userPw: string;
+    userName: string;
+    userBirth: string;
+    userGender: string;
+    userEmail: string;
+    userPhone: string;
+    userAddress: string;
+    userJoinDate: Date;
+    accountStatusNo: number;
+    userProfileUrl: string | null;
+}
 
 const JoinForm: React.FC = () => {
     const navigation = useNavigate();
 
+    // 회원가입 양식 폼
+    const [accountVO, setAccountVO] = useState<AccountVO>({
+        userId: 1,
+        userPw: "",
+        userName: "",
+        userBirth: "",
+        userGender: "",
+        userEmail: "",
+        userPhone: "",
+        userAddress: "",
+        userJoinDate: new Date(),
+        accountStatusNo: 1,
+        userProfileUrl: null,
+    })
+
+    // 이메일 상태관리
+    const [emailLocal, setEmailLocal] = useState("");
+    const [emailDomain, setEmailDomain] = useState("");
+    const [isCustomEmail, setIsCustomEmail] = useState(true); // 직접입력 유무
+
+    // 주소 상태관리
+    const [addressMain, setAddressMain] = useState("");
+    const [addressDetail, setAddressDetail] = useState("");
+
+    // 기본 input change event
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const {name, value} = e.target;
+        setAccountVO((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
+    };
+
+    // 이메일 input change event
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const {name, value} = e.target;
+
+        if(name === "emailLocal") {
+            setEmailLocal(value);
+            setAccountVO((prevState) => ({
+                ...prevState,
+                userEmail: `${value}@${emailDomain}`,
+            }));
+        } else if (name === "emailDomain") {
+            setEmailDomain(value);
+            setAccountVO((prevState) => ({
+                ...prevState,
+                userEmail: `${emailLocal}@${value}`,
+            }));
+        }
+    };
+
+    // 이메일 도메인 select change event
+    const handleEmailSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const selectedDomain = e.target.value;
+        if (selectedDomain === "custom") {
+            setIsCustomEmail(true);
+            setEmailDomain("");
+        } else {
+            setIsCustomEmail(false);
+            setEmailDomain(selectedDomain);
+            setAccountVO((prevState) => ({
+                ...prevState,
+                userEmail: `${emailLocal}@${selectedDomain}`,
+            }));
+        }
+    };
+
+    // 주소 input change event
+    const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const {name, value} = e.target;
+
+        if (name === "addressMain") {
+            setAddressMain(value);
+            setAccountVO((prevState) => ({
+                ...prevState,
+                userAddress: `${value} ${addressDetail}`,
+            }));
+        } else if (name === "addressDetail") {
+            setAddressDetail(value);
+            setAccountVO((prevState) => ({
+                ...prevState,
+                userAddress: `${addressMain} ${value}`,
+            }));
+        }
+    }
+
+    // 회원가입 폼 제출 event
+    const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault(); // 기본 제출 방지
+
+        try {
+            const response = await axios.post("/joinForm", accountVO);
+
+            if(response.request.responseURL) {
+                window.location.href = response.request.responseURL;
+            } else {
+                console.log("회원가입 성공:", response.data);
+            }
+        } catch (error) {
+            console.error("회원가입 에러:", error);
+        }
+    }
+
     return (
-        <div className="join-container">
+        <form className="join-container" onSubmit={handleSubmitForm}>
             {/* 가입창 상단 */}
             <div className="join-text-wrap">
                 <p className="join-title">회원가입</p>
@@ -24,12 +143,12 @@ const JoinForm: React.FC = () => {
             <div className="join-form-container">
                 <p>아이디</p>
                 <div className="join-form-input-wrap">
-                    <input type="text" />
+                    <input type="text" name="userId" value={accountVO.userId} onChange={handleInputChange} />
                     <Button text={"중복확인"} className="white-button-s" />
                 </div>
                 <p>비밀번호</p>
                 <div className="join-form-input-wrap">
-                    <input type="password" />
+                    <input type="password" name="userPw" value={accountVO.userPw} onChange={handleInputChange} />
                 </div>
                 <div className="join-form-pw-info">
                     <IoIosInformationCircleOutline />
@@ -41,35 +160,35 @@ const JoinForm: React.FC = () => {
                 </div>
                 <p>이름</p>
                 <div className="join-form-input-wrap">
-                    <input type="text" />
+                    <input type="text" name="userName" value={accountVO.userName} onChange={handleInputChange} />
                 </div>
                 <div className="join-form-birth-gender-wrap">
                     <div className="join-form-birth">
                         <p>생년월일</p>
                         <div className="calendar-wrap">
-                            <input type="date" />
+                            <input type="date" name="userBirth" value={accountVO.userBirth} onChange={handleInputChange} />
                         </div>
                     </div>
                     <div className="join-form-gender">
                         <p>성별</p>
                         <div className="gender-wrap">
-                            <input type="radio" name="genderOption" />
+                            <input type="radio" name="userGender" value="남" checked={accountVO.userGender === "남"} onChange={handleInputChange} />
                             <p>남</p>
-                            <input type="radio" name="genderOption" />
+                            <input type="radio" name="genderOption" value="여" checked={accountVO.userGender === "여"} onChange={handleInputChange} />
                             <p>여</p>
                         </div>
                     </div>
                 </div>
                 <p>연락처</p>
                 <div className="join-form-input-wrap">
-                    <input type="text" />
+                    <input type="text" name="userPhone" value={accountVO.userPhone} onChange={handleInputChange} />
                 </div>
                 <p>이메일</p>
                 <div className="join-form-input-wrap email-wrap">
-                    <input type="email" />
+                    <input type="email" name="emailLocal" value={emailLocal} onChange={handleEmailChange} />
                     <MdAlternateEmail />
-                    <input type="email" />
-                    <select>
+                    <input type="email" name="emailDomain" value={emailDomain} onChange={handleEmailChange} />
+                    <select onChange={handleEmailSelect}>
                         <option>직접입력</option>
                         <option>naver.com</option>
                         <option>gmail.com</option>
@@ -77,11 +196,11 @@ const JoinForm: React.FC = () => {
                 </div>
                 <p>주소</p>
                 <div className="join-form-input-wrap address-search-wrap">
-                    <input type="text" />
+                    <input type="text" name="addressMain" value={addressMain} onChange={handleAddressChange} />
                     <Button text={"검색"} className="white-button-s" />
                 </div>
                 <div className="join-form-input-wrap address-detail">
-                    <input type="text" />
+                    <input type="text" name="addressDetail" value={addressDetail} onChange={handleAddressChange} />
                 </div>
             </div>
 
@@ -91,9 +210,9 @@ const JoinForm: React.FC = () => {
             {/* 버튼 */}
             <div className="join-form-button-wrap">
                 <Button text="이전" className="gray-button-m" onClick={() => navigation(-1)} />
-                <Button text="다음" className="pink-button-m" onClick={() => navigation("/joinComplete")} />
+                <Button text="다음" className="pink-button-m" type="submit" />
             </div>
-        </div>
+        </form>
     );
 };
 
