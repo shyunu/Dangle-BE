@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import ProgressBar from "../../components/ProgressBar";
 import Button from "../../components/Button";
 import "../../styles/join/JoinComplete.css";
