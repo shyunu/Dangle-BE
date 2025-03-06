@@ -4,4 +4,35 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.dangle.account.AccountMapper">
+
+    <insert id="joinForm" parameterType="AccountVO">
+        INSERT INTO "user" (
+                            USER_NO,
+                            USER_ID,
+                            USER_PW,
+                            USER_NAME,
+                            USER_BIRTH,
+                            USER_GENDER,
+                            USER_EMAIL,
+                            USER_PHONE,
+                            USER_ADDRESS,
+                            USER_JOINDATE,
+                            ACCOUNT_STATUS_NO,
+                            USER_PROFILE_URL
+        ) VALUES (
+                  #{user_no},
+                  #{user_id},
+                  #{user_pw},
+                  #{user_name},
+                  #{user_birth},
+                  #{user_birth},
+                  #{user_gender},
+                  #{user_email},
+                  #{user_phone},
+                  #{user_address},
+                  #{user_joindate},
+                  #{account_status_no},
+                  #{user_profile_url}
+                         )
+    </insert>
 </mapper>
