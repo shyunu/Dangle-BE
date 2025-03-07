@@ -13,11 +13,10 @@ import java.util.Date;
 @Builder
 public class AccountVO {
 
-    private Integer userNo; // 회원번호
     private String userId; // 회원아이디
     private String userPw; // 회원비밀번호
     private String userName; // 회원이름
-    private Date userBirth; // 회원생년월일
+    private String userBirth; // 회원생년월일
     private String userGender; // 회원성별
     private String userEmail; // 회원이메일
     private String userPhone; // 회원전화번호
