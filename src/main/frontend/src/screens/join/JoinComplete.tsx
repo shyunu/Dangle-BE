@@ -2,10 +2,12 @@ import React, {useState} from "react";
 import ProgressBar from "../../components/ProgressBar";
 import Button from "../../components/Button";
 import "../../styles/join/JoinComplete.css";
-import { useNavigate } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const JoinComplete: React.FC = () => {
     const navigation = useNavigate();
+    const location = useLocation();
+    const userName = location.state?.userName; // 회원가입한 이름 받아오기
 
     return (
         <div className="join-container">
@@ -23,7 +25,7 @@ const JoinComplete: React.FC = () => {
                 <div className="join-complete-box">
                     <p>회원가입 완료</p>
                     <div className="join-complete-box-text">
-                        <p>김수현님 반갑습니다 😃</p>
+                        <p>{userName}님 반갑습니다 😃</p>
                         <p>댕글댕글의 회원이 되신걸 환영합니다.</p>
                     </div>
                 </div>

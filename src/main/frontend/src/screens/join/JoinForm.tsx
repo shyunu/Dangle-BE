@@ -8,7 +8,7 @@ import { MdAlternateEmail } from "react-icons/md";
 import axios from "axios";
 
 interface AccountVO {
-    userId?: number;
+    userId?: string | number;
     userPw: string;
     userName: string;
     userBirth: string;
@@ -26,7 +26,7 @@ const JoinForm: React.FC = () => {
 
     // 회원가입 양식 폼
     const [accountVO, setAccountVO] = useState<AccountVO>({
-        userId: 1,
+        userId: "",
         userPw: "",
         userName: "",
         userBirth: "",
@@ -81,7 +81,11 @@ const JoinForm: React.FC = () => {
         const selectedDomain = e.target.value;
         if (selectedDomain === "custom") {
             setIsCustomEmail(true);
-            setEmailDomain("");
+            setEmailDomain("");  // 사용자 입력을 위해 emailDomain 초기화
+            setAccountVO((prevState) => ({
+                ...prevState,
+                userEmail: `${emailLocal}@`,  // @뒤는 비워두기
+            }));
         } else {
             setIsCustomEmail(false);
             setEmailDomain(selectedDomain);
@@ -115,13 +119,17 @@ const JoinForm: React.FC = () => {
     const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); // 기본 제출 방지
 
-        try {
-            const response = await axios.post("/joinForm", accountVO);
+        const formattedAccountVO = {
+            ...accountVO,
+            userJoinDate: accountVO.userJoinDate.toISOString().split("T")[0]  // "YYYY-MM-DD"
+        };
 
-            if(response.request.responseURL) {
-                window.location.href = response.request.responseURL;
-            } else {
+        try {
+            const response = await axios.post("/joinForm", formattedAccountVO);
+
+            if (response.data) {
                 console.log("회원가입 성공:", response.data);
+                navigation('/joinComplete', { state: { userName: accountVO.userName }});
             }
         } catch (error) {
             console.error("회원가입 에러:", error);
@@ -174,7 +182,7 @@ const JoinForm: React.FC = () => {
                         <div className="gender-wrap">
                             <input type="radio" name="userGender" value="남" checked={accountVO.userGender === "남"} onChange={handleInputChange} />
                             <p>남</p>
-                            <input type="radio" name="genderOption" value="여" checked={accountVO.userGender === "여"} onChange={handleInputChange} />
+                            <input type="radio" name="userGender" value="여" checked={accountVO.userGender === "여"} onChange={handleInputChange} />
                             <p>여</p>
                         </div>
                     </div>
@@ -185,9 +193,9 @@ const JoinForm: React.FC = () => {
                 </div>
                 <p>이메일</p>
                 <div className="join-form-input-wrap email-wrap">
-                    <input type="email" name="emailLocal" value={emailLocal} onChange={handleEmailChange} />
+                    <input type="text" name="emailLocal" value={emailLocal} onChange={handleEmailChange} />
                     <MdAlternateEmail />
-                    <input type="email" name="emailDomain" value={emailDomain} onChange={handleEmailChange} />
+                    <input type="text" name="emailDomain" value={emailDomain} onChange={handleEmailChange} />
                     <select onChange={handleEmailSelect}>
                         <option>직접입력</option>
                         <option>naver.com</option>
