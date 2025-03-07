@@ -6,7 +6,7 @@
 <mapper namespace="com.project.dangle.account.AccountMapper">
 
     <insert id="joinForm" parameterType="AccountVO">
-        INSERT INTO member (
+        INSERT INTO users (
                             USER_ID,
                             USER_PW,
                             USER_NAME,
