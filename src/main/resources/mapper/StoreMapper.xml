@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.dangle.store.StoreMapper">
+
+    <resultMap id="storeResultMap" type="com.project.dangle.command.StoreVO">
+        <result property="storeNo" column="STORE_NO"/>
+        <result property="storeName" column="STORE_NAME"/>
+        <result property="storePhone" column="STORE_PHONE"/>
+        <result property="storeAddress" column="STORE_ADDRESS"/>
+        <result property="storeAddressDetail" column="STORE_ADDRESS_DETAIL"/>
+        <result property="storeOpenTime" column="STORE_OPEN_TIME"/>
+        <result property="storeCloseTime" column="STORE_CLOSE_TIME"/>
+        <result property="storeAboutComment" column="STORE_ABOUT_COMMENT"/>
+        <result property="storeDayoff" column="STORE_DAYOFF"/>
+        <result property="reviewCount" column="review_count"/>
+        <result property="reviewScoreAvg" column="avg_review_score"/>
+    </resultMap>
+
+    <select id="getStoreList" resultMap="storeResultMap">
+        select
+            s.store_no,
+            s.store_name,
+            s.store_phone,
+            s.store_address,
+            s.store_address_detail,
+            s.store_open_time,
+            s.store_close_time,
+            s.store_about_comment,
+            s.store_dayoff,
+            COUNT(r.review_no) AS review_count,
+            AVG(r.review_score) AS avg_review_score
+
+        from store as s
+                 left join review as r
+                           on s.store_no = r.store_no
+        group by
+            s.store_no,
+            s.store_name,
+            s.store_phone,
+            s.store_address,
+            s.store_address_detail,
+            s.store_open_time,
+            s.store_close_time,
+            s.store_about_comment,
+            s.store_dayoff
+        ORDER BY S.STORE_NO ASC;
+    </select>
+
+</mapper>
