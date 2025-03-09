@@ -6,7 +6,7 @@ import { FaRegHeart } from "react-icons/fa6";
 import { FaRegCheckCircle, FaRegCircle, FaStar, FaStarHalf, FaRegStar } from "react-icons/fa";
 import Button from "../../components/Button";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Store } from "./SearchStore";
+import {Store} from "../../types/store";
 
 interface StoreImage {
     no: number;
@@ -114,16 +114,6 @@ const StoreInfo: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState("전체");
     const [selectedDesigner, setSelectedDesigner] = useState<number | null>(null);
 
-    // const sliderSettings = {
-    //   dots: false,
-    //   infinite: true,
-    //   speed: 500,
-    //   slidesToShow: 1,
-    //   slidesToScroll: 1,
-    //   autoplay: true,
-    //   autoplaySpeed: 3000,
-    // };
-
     const filteredMenu =
         selectedCategory === "전체" ? groomingMenu : groomingMenu.filter((item) => item.category === selectedCategory);
 
@@ -158,7 +148,7 @@ const StoreInfo: React.FC = () => {
         <div className="store-info-container">
             <div className="store-title-wrap">
                 <IoIosArrowBack onClick={() => navigation(-1)} />
-                <p>{store.name}</p>
+                <p>{store.storeName}</p>
                 <FaRegHeart />
             </div>
 

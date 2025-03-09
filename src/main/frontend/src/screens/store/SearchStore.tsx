@@ -1,47 +1,40 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "../../styles/store/SearchStore.css";
 import Button from "../../components/Button";
 import { LuMapPin, LuClock4 } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
 import {formatWithCommas} from "../../utils/formatWithCommas";
 import {CitySelect, DistrictSelect, TimeSelect} from "../../utils/SelectBox";
+import {Store} from "../../types/store";
+import axios from "axios";
+import {formatHourMinute} from "../../utils/formatHourMinute";
+import {formatReviewScore} from "../../utils/formatReviewScore";
 
-export interface Store {
-    no: number;
-    name: string;
-    rating: number;
-    reviewCount: number;
-    location: string;
-    businessHours: string;
-    imageUrl: string[];
-}
-
-const storeData: Store[] = [
-    {
-        no: 1,
-        name: "푸들푸들",
-        location: "동대문구청 2번출구 도보 3분 거리",
-        rating: 4.5,
-        reviewCount: 1898,
-        businessHours: "09:00~18:00",
-        imageUrl: ["/image/store1-1.jpg", "/image/store1-2.jpg"],
-    },
-    {
-        no: 2,
-        name: "애니살롱",
-        rating: 4.3,
-        reviewCount: 566,
-        location: "신설동역 6번출구 도보 2분 거리",
-        businessHours: "09:00~18:00",
-        imageUrl: ["/image/store2-1.jpg", "/image/store2-2.jpg"],
-    },
-];
 
 const SearchStore: React.FC = () => {
     const navigation = useNavigate();
     const handleStoreClick = (store: Store) => {
         navigation("/storeInfo", { state: { store } });
     };
+
+    const [storeData, setStoreData] = useState<Store[]>([]);
+
+    useEffect(() => {
+        axios
+            .get<Store[]>("/getStoreList")
+            .then((response) => {
+                console.log("서버에서 받은 데이터:", response.data); // 서버에서 받은 데이터 확인
+                if (Array.isArray(response.data)) {
+                    setStoreData(response.data);
+                } else {
+                    console.error("예상하지 못한 응답 구조입니다.");
+                }
+            })
+            .catch((error) => {
+                console.error("매장데이터 에러: ", error);
+            });
+    }, []);
+
     return (
         <div className="search-store-container">
             {/* 선택 및 검색란 */}
@@ -71,25 +64,25 @@ const SearchStore: React.FC = () => {
             {/* 상점박스 */}
             <div className="store-box-container">
                 {storeData.map((store) => (
-                    <div key={store.no} className="store-box-wrap" onClick={() => handleStoreClick(store)}>
-                        <p className="store-name">{store.name}</p>
+                    <div key={store.storeNo} className="store-box-wrap" onClick={() => handleStoreClick(store)}>
+                        <p className="store-name">{store.storeName}</p>
                         <div className="store-review-icon">
                             <img src="./image/star.jpg" />
-                            <p>{store.rating}</p>
+                            <p>{formatReviewScore(store.reviewScoreAvg)}</p>
                             <p>리뷰 {formatWithCommas(store.reviewCount)}개</p>
                         </div>
                         <div className="store-images">
-                            {store.imageUrl.map((url, index) => (
-                                <img key={index} src={url} alt={`${store.name} 이미지`} />
-                            ))}
+                            {/*{store.imageUrl.map((url, index) => (*/}
+                            {/*    <img key={index} src={url} alt={`${store.storeName} 이미지`} />*/}
+                            {/*))}*/}
                         </div>
                         <div className="store-info-icon">
                             <LuMapPin />
-                            <p>{store.location}</p>
+                            <p>{store.storeAddress} {store.storeAddressDetail}</p>
                         </div>
                         <div className="store-info-icon">
                             <LuClock4 />
-                            <p>영업시간:{store.businessHours}</p>
+                            <p>영업시간 : {formatHourMinute(store.storeOpenTime)}~{formatHourMinute(store.storeCloseTime)} ({store.storeDayoff} 휴무)</p>
                         </div>
                     </div>
                 ))}
