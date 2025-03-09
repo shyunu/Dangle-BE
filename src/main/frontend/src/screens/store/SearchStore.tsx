@@ -4,7 +4,7 @@ import Button from "../../components/Button";
 import { LuMapPin, LuClock4 } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
 import {formatWithCommas} from "../../utils/formatWithCommas";
-import {CitySelect, DistrictSelect, TimeSelect} from "../../utils/SelectBox";
+import {CitySelect, DistrictSelect, TimeSelect, FilterSelect} from "../../components/CustomDropdown";
 import {Store} from "../../types/store";
 import axios from "axios";
 import {formatHourMinute} from "../../utils/formatHourMinute";
@@ -56,9 +56,7 @@ const SearchStore: React.FC = () => {
 
             {/* 필터 */}
             <div className="search-store-filter">
-                <select>
-                    <option>기본정렬순</option>
-                </select>
+                <FilterSelect />
             </div>
 
             {/* 상점박스 */}
