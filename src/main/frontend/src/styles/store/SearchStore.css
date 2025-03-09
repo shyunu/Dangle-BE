@@ -24,7 +24,7 @@
   gap: 12.5px;
   margin-top: 10px;
 }
-.search-store-option-wrap select {
+.search-store-option-wrap > .dropdown > button {
   border: 1px solid #e3e3e3;
   border-radius: 5px;
   width: 185px;
@@ -33,11 +33,28 @@
   color: #777;
   font-weight: 100;
   font-size: 13px;
+  background-color: #fff;
+  text-align: left;
+  padding-left: 10px;
 }
-.search-store-option-wrap select:focus {
+
+.dropdown .dropdown-toggle::after {
+  margin-left: 100px;
+}
+.dropdown:nth-of-type(3) .dropdown-toggle::after {
+  margin-left: 82px;
+}
+#dropdown-basic {
+  background-color: #fff;
+  border-color: #e3e3e3;
+}
+.search-store-option-wrap > .dropdown > .dropdown-menu {
+  width: 100%;
+}
+.search-store-option-wrap button:focus {
   outline: none;
-  border-color: #edafb8;
-  box-shadow: 0 0 8px rgba(237, 175, 184, 0.5);
+  /*border-color: #edafb8;*/
+  /*box-shadow: 0 0 8px rgba(237, 175, 184, 0.5);*/
 }
 
 /* search input */
@@ -81,7 +98,7 @@
   height: 70px;
   padding: 15px 0px;
 }
-.search-store-filter select {
+.search-store-filter button {
   font-size: 13px;
   border: 1px solid #e3e3e3;
   border-radius: 5px;
@@ -91,11 +108,30 @@
   color: #777;
   font-weight: 100;
   font-size: 13px;
+  text-align: left;
+  padding-left: 10px;
+}
+.search-store-filter .dropdown .dropdown-toggle::after {
+  margin-left: 40px;
 }
 .search-store-filter select:focus {
   outline: none;
   border-color: #edafb8;
   box-shadow: 0 0 8px rgba(237, 175, 184, 0.5);
+}
+
+.search-store-filter .dropdown .dropdown-toggle {
+  color: #777 !important;
+  background-color: #fff !important;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+}
+
+.search-store-filter .dropdown .dropdown-toggle:hover,
+.search-store-filter .dropdown .dropdown-toggle:focus,
+.search-store-filter .dropdown .dropdown-toggle:active {
+  color: #777 !important;
+  background-color: #fff !important;
 }
 
 /* 상점 박스 */
