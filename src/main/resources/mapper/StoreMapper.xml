@@ -20,33 +20,58 @@
     </resultMap>
 
     <select id="getStoreList" resultMap="storeResultMap">
-        select
-            s.store_no,
-            s.store_name,
-            s.store_phone,
-            s.store_address,
-            s.store_address_detail,
-            s.store_open_time,
-            s.store_close_time,
-            s.store_about_comment,
-            s.store_dayoff,
-            COUNT(r.review_no) AS review_count,
-            AVG(r.review_score) AS avg_review_score
-
-        from store as s
-                 left join review as r
-                           on s.store_no = r.store_no
-        group by
-            s.store_no,
-            s.store_name,
-            s.store_phone,
-            s.store_address,
-            s.store_address_detail,
-            s.store_open_time,
-            s.store_close_time,
-            s.store_about_comment,
-            s.store_dayoff
+        SELECT
+            S.STORE_NO,
+            S.STORE_NAME,
+            S.STORE_PHONE,
+            S.STORE_ADDRESS,
+            S.STORE_ADDRESS_DETAIL,
+            S.STORE_OPEN_TIME,
+            S.STORE_CLOSE_TIME,
+            S.STORE_ABOUT_COMMENT,
+            S.STORE_DAYOFF,
+            COUNT(R.REVIEW_NO) AS REVIEW_COUNT,
+            AVG(R.REVIEW_SCORE) AS AVG_REVIEW_SCORE
+        FROM STORE AS S
+        LEFT JOIN REVIEW AS R
+        ON S.STORE_NO = R.STORE_NO
+        GROUP BY
+            S.STORE_NO,
+            S.STORE_NAME,
+            S.STORE_PHONE,
+            S.STORE_ADDRESS,
+            S.STORE_ADDRESS_DETAIL,
+            S.STORE_OPEN_TIME,
+            S.STORE_CLOSE_TIME,
+            S.STORE_ABOUT_COMMENT,
+            S.STORE_DAYOFF
         ORDER BY S.STORE_NO ASC;
+    </select>
+
+    <resultMap id="designerResultMap" type="com.project.dangle.command.DesignerVO">
+        <result property="designerNo" column="DESIGNER_NO"/>
+        <result property="storeNo" column="STORE_NO"/>
+        <result property="designerName" column="DESIGNER_NAME"/>
+        <result property="designerRole" column="DESIGNER_ROLE"/>
+        <result property="designerExperience" column="DESIGNER_EXPERIENCE"/>
+        <result property="designerInfo" column="DESIGNER_INFO"/>
+        <result property="designerPhone" column="DESIGNER_PHONE"/>
+        <result property="designerStatusNo" column="DESIGNER_STATUS_NO"/>
+    </resultMap>
+
+    <select id="getDesignerListByStoreNo" resultMap="designerResultMap">
+        SELECT
+            D.DESIGNER_NO,
+            D.STORE_NO,
+            D.DESIGNER_NAME,
+            D.DESIGNER_ROLE,
+            D.DESIGNER_EXPERIENCE,
+            D.DESIGNER_INFO,
+            D.DESIGNER_PHONE,
+            D.DESIGNER_STATUS_NO
+        FROM DESIGNER AS D
+        WHERE D.STORE_NO = #{storeNo}
+        ORDER BY DESIGNER_NO ASC;
     </select>
 
 </mapper>

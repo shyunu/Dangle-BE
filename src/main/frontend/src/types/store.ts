@@ -7,6 +7,7 @@ export interface Store {
     storeAddressDetail: string; // 매장주소상세
     storeOpenTime: string; // 매장오픈시간
     storeCloseTime: string; // 매장마감시간
+    storeAboutComment: string; // 매장소개글
     storeDayoff: string; // 매장휴무일
     imageUrl?: string; // 매장이미지
 }

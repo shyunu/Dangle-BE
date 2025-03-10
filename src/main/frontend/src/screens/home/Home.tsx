@@ -5,6 +5,7 @@ import CardSlider from "../../components/CardSlider";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
+import {Store} from "../../types/store";
 
 interface EventBanner {
     no: number;
@@ -18,19 +19,6 @@ const eventImage: EventBanner[] = [
     { no: 5, imageUrl: "/image/slide1.jpg" },
     { no: 6, imageUrl: "/image/slide6.jpg" },
 ];
-
-interface Store {
-    storeNo: number; // 매장번호
-    storeName: string; // 매장이름
-    reviewScoreAvg: number; // 리뷰평점
-    reviewCount: number; // 리뷰개수
-    storeAddress: string; // 매장주소
-    storeAddressDetail: string; // 매장주소상세
-    storeOpenTime: string; // 매장오픈시간
-    storeCloseTime: string; // 매장마감시간
-    storeDayoff: string; // 매장휴무일
-    imageUrl?: string; // 매장이미지
-}
 
 const Home: React.FC = () => {
     const [storeData, setStoreData] = useState<Store[]>([]);

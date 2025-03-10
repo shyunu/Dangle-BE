@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import "../../styles/store/StoreInfo.css";
 import Slider from "../../components/Slider";
 import { IoIosArrowBack } from "react-icons/io";
 import { FaRegHeart } from "react-icons/fa6";
-import { FaRegCheckCircle, FaRegCircle, FaStar, FaStarHalf, FaRegStar } from "react-icons/fa";
+import { FaRegCheckCircle, FaRegCircle } from "react-icons/fa";
 import Button from "../../components/Button";
 import { useLocation, useNavigate } from "react-router-dom";
 import {Store} from "../../types/store";
+import {renderStars} from "../../utils/renderStars";
+import {Designer} from "../../types/designer";
+import axios from "axios";
 
 interface StoreImage {
     no: number;
@@ -35,24 +38,7 @@ const groomingMenu: GroomingMenu[] = [
     { no: 6, name: "부분 미용", category: "커트", price: 40000 },
 ];
 
-interface Designer {
-    no: number;
-    role: string; //직책
-    name: string; //이름
-    info: string; //소개글
-    experience: string; //경력
-}
 
-const designerList: Designer[] = [
-    { no: 1, role: "원장", name: "김수현", info: "강아지마다 개성 있는 스타일을 찾아드려요!", experience: "경력 10년" },
-    {
-        no: 2,
-        role: "디자이너",
-        name: "강해린",
-        info: "편안한 분위기에서 아이들이 스트레스 없이 예뻐질 수 있도록 도와드려요!",
-        experience: "경력 5년",
-    },
-];
 
 interface Review {
     no: number;
@@ -110,9 +96,11 @@ const StoreInfo: React.FC = () => {
     const location = useLocation();
     const navigation = useNavigate();
     const store = location.state?.store as Store;
+    const storeNo = store?.storeNo;
     const [selectedTab, setSelectedTab] = useState<string>("홈");
     const [selectedCategory, setSelectedCategory] = useState("전체");
     const [selectedDesigner, setSelectedDesigner] = useState<number | null>(null);
+
 
     const filteredMenu =
         selectedCategory === "전체" ? groomingMenu : groomingMenu.filter((item) => item.category === selectedCategory);
@@ -121,28 +109,23 @@ const StoreInfo: React.FC = () => {
         setSelectedDesigner(selectedDesigner === no ? null : no);
     };
 
-    // 리뷰 별점
-    const renderStars = (rating: number) => {
-        const stars = [];
-        const fullStars = Math.floor(rating);
-        const hasHalfStar = rating % 1 !== 0; //반쪽별이 필요한지 유무판단
+    const [designerData, setDesignerData] = useState<Designer[]>([]);
 
-        // 기본 별
-        for (let i = 0; i < fullStars; i++) {
-            stars.push(<FaStar key={i} />);
-        }
-        // 반쪽 별
-        if (hasHalfStar) {
-            stars.push(<FaStarHalf key={fullStars} />);
-        }
-        //빈자리 빈 별로 채우기
-        const emptyStars = 5 - stars.length;
-        for (let i = 0; i < emptyStars; i++) {
-            stars.push(<FaRegStar key={fullStars + i} style={{ color: "#ffb703" }} />);
-        }
-
-        return stars;
-    };
+    useEffect(() => {
+        axios
+            .get<Designer[]>(`http://localhost:8080/getDesignerListByStoreNo`, { params: { storeNo }})
+            .then((response) => {
+                console.log("서버에서 받은 데이터:", response.data); // 서버에서 받은 데이터 확인
+                if (Array.isArray(response.data)) {
+                    setDesignerData(response.data);
+                } else {
+                    console.error("예상하지 못한 응답 구조입니다.");
+                }
+            })
+            .catch((error) => {
+                console.error("디자이너 목록 조회 에러: ", error);
+            });
+    }, []);
 
     return (
         <div className="store-info-container">
@@ -179,23 +162,7 @@ const StoreInfo: React.FC = () => {
                     <>
                         <div className="about-home">
                             <p className="about-title">매장 소개</p>
-                            <p>
-                                안녕하세요! 댕글댕글입니다! 💛 <br />
-                                우리 아이들의 예쁨을 한층 더 업그레이드해 줄 프리미엄 반려견 미용샵을 소개합니다! <br />
-                                <br />
-                                🔹 위치: 서울 강남구 댕댕로 101 (댕글댕글 반려동물타운 1층) <br />
-                                🔹 운영 시간: 매일 09:00 ~ 16:00 (매주 월요일 휴무) <br />
-                                🔹 연락처: 02-1234-5678 <br />
-                                🔹 주차공간 매장 앞 2대 보유 <br />
-                                <br />
-                                💎 댕글댕글만의 특별함! <br />✅ 1:1 맞춤 미용 서비스 – 강아지의 얼굴형과 털 상태에 따라 최적의
-                                스타일링! <br />✅ 천연 미용 제품 사용 – 피부에 자극 없는 저자극 프리미엄 제품 사용! <br />✅ 반려견
-                                전용 스파 서비스 – 스트레스 해소를 위한 힐링 스파까지! <br />✅ 미용 후 사진 서비스 제공 – 예쁘게 변신한
-                                모습, 고퀄리티 사진으로 남겨드려요! <br />
-                                <br />
-                                🐶💖 우리 아이를 위한 최고의 스타일링, 댕글댕글에서 경험하세요! <br />
-                                댕글댕글 앱에서 지금 바로 예약하세요! 🚀
-                            </p>
+                            <p>{store.storeAboutComment}</p>
                         </div>
                     </>
                 ) : selectedTab === "메뉴" ? (
@@ -231,20 +198,24 @@ const StoreInfo: React.FC = () => {
                             <p className="about-title">디자이너 소개</p>
                             <div className="designer-border"></div>
                             <div className="designer-wrap">
-                                {designerList.map((designer) => (
-                                    <div key={designer.no} className="designer-box" onClick={() => selectDesigner(designer.no)}>
-                                        <div className="designer-check-wrap">
-                                            {selectedDesigner === designer.no ? <FaRegCheckCircle /> : <FaRegCircle />}
-                                            <p>
-                                                {designer.role} {designer.name}
+                                {designerData && designerData.length > 0 ? (
+                                    designerData.map((designer) => (
+                                        <div key={designer.designerNo} className="designer-box" onClick={() => selectDesigner(designer.designerNo)}>
+                                            <div className="designer-check-wrap">
+                                                {selectedDesigner === designer.designerNo ? <FaRegCheckCircle /> : <FaRegCircle />}
+                                                <p>
+                                                    {designer.designerRole} {designer.designerName}
+                                                </p>
+                                            </div>
+                                            <p className="designer-info">
+                                                {designer.designerInfo} (경력 {designer.designerExperience})
                                             </p>
+                                            <div className="designer-border"></div>
                                         </div>
-                                        <p className="designer-info">
-                                            {designer.info} ({designer.experience})
-                                        </p>
-                                        <div className="designer-border"></div>
-                                    </div>
-                                ))}
+                                    ))
+                                ) : (
+                                    <p>디자이너 정보가 없습니다.</p>
+                                )}
                             </div>
                         </div>
                     </>
