@@ -155,9 +155,15 @@
   line-height: 16px;
   margin-left: 10px;
 }
+.designer-check-wrap > p:nth-of-type(2) {
+  font-size: 12px;
+  line-height: 18px;
+  color: #777;
+}
 .designer-info {
   font-size: 13px;
-  width: 86.5%;
+  width: 100%;
+  margin: 0px 0px 0px 25px;
 }
 
 /* review */

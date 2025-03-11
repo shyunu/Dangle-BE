@@ -206,9 +206,10 @@ const StoreInfo: React.FC = () => {
                                                 <p>
                                                     {designer.designerRole} {designer.designerName}
                                                 </p>
+                                                <p>(경력 {designer.designerExperience})</p>
                                             </div>
                                             <p className="designer-info">
-                                                {designer.designerInfo} (경력 {designer.designerExperience})
+                                                {designer.designerInfo}
                                             </p>
                                             <div className="designer-border"></div>
                                         </div>
