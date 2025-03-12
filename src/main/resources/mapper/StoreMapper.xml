@@ -18,7 +18,7 @@
         <result property="reviewCount" column="review_count"/>
         <result property="reviewScoreAvg" column="avg_review_score"/>
     </resultMap>
-
+    <!-- 매장조회 -->
     <select id="getStoreList" resultMap="storeResultMap">
         SELECT
             S.STORE_NO,
@@ -58,7 +58,7 @@
         <result property="designerPhone" column="DESIGNER_PHONE"/>
         <result property="designerStatusNo" column="DESIGNER_STATUS_NO"/>
     </resultMap>
-
+    <!-- 디자이너조회 -->
     <select id="getDesignerListByStoreNo" resultMap="designerResultMap">
         SELECT
             D.DESIGNER_NO,
@@ -74,4 +74,27 @@
         ORDER BY DESIGNER_NO ASC;
     </select>
 
+    <resultMap id="groomingResultMap" type="com.project.dangle.command.GroomingVO">
+        <result property="groomingNo" column="GROOMING_NO"/>
+        <result property="groomingName" column="GROOMING_NAME"/>
+        <result property="groomingPrice" column="GROOMING_PRICE"/>
+        <result property="categoryNo" column="CATEGORY_NO"/>
+        <result property="categoryName" column="CATEGORY_NAME"/>
+        <result property="storeNo" column="STORE_NO"/>
+    </resultMap>
+    <!-- 미용메뉴조회 -->
+    <select id="getGroomingListByStoreNo" resultMap="groomingResultMap">
+        SELECT
+            GM.GROOMING_NO,
+            GM.GROOMING_NAME,
+            GM.GROOMING_PRICE,
+            GM.CATEGORY_NO,
+            GC.CATEGORY_NAME,
+            GM.STORE_NO
+        FROM GROOMING_MENU AS GM
+        INNER JOIN GROOMING_CATEGORY AS GC
+        ON GM.CATEGORY_NO = GC.CATEGORY_NO
+        WHERE GM.STORE_NO = #{storeNo}
+        ORDER BY GM.GROOMING_NO ASC;
+    </select>
 </mapper>
