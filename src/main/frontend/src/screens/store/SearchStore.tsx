@@ -21,7 +21,7 @@ const SearchStore: React.FC = () => {
 
     useEffect(() => {
         axios
-            .get<Store[]>("/getStoreList")
+            .get<Store[]>("/store/getStoreList")
             .then((response) => {
                 console.log("서버에서 받은 데이터:", response.data); // 서버에서 받은 데이터 확인
                 if (Array.isArray(response.data)) {
