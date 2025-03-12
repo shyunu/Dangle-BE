@@ -95,9 +95,17 @@
   display: flex;
   flex-direction: row;
   gap: 10px;
-  width: 75%;
+  width: 100%;
   margin: 0;
   padding: 5px 0px;
+  overflow-x: auto;
+  white-space: nowrap; /* 버튼 줄바꿈 방지 */
+  scroll-behavior: smooth; /* 부드러운 스크롤 */
+  -webkit-overflow-scrolling: touch; /* 모바일 터치 스크롤 지원 */
+}
+/* 스크롤바 숨기기 (크롬, 사파리) */
+.menu-tab-wrap::-webkit-scrollbar {
+  display: none;
 }
 .menu-tab {
   padding: 10px;
@@ -110,10 +118,21 @@
   line-height: 0px;
   border-radius: 10px;
   font-weight: 200;
+  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+  text-align: center;
+  flex-shrink: 0; /* 버튼 크기 유지 */
 }
 .menu-tab.active {
   background: #a8caba;
   font-weight: bold;
+}
+.menu-tab-wrap .carousel-control-next, .carousel-control-prev {
+  color: #000;
+}
+.menu-tab-container {
+  width: 100%;
+  display: flex;
+  gap: 10px;
 }
 
 .menu-price-wrap {

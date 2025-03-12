@@ -1,6 +1,7 @@
 package com.project.dangle.controller;
 
 import com.project.dangle.command.DesignerVO;
+import com.project.dangle.command.GroomingVO;
 import com.project.dangle.command.StoreVO;
 import com.project.dangle.store.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,13 @@ public class StoreController {
     @GetMapping("/getDesignerListByStoreNo")
     public List<DesignerVO> getDesignerListByStoreNo(@RequestParam Integer storeNo) {
         List<DesignerVO> list = storeService.getDesignerListByStoreNo(storeNo);
+        return list;
+    }
+
+    // 미용메뉴조회
+    @GetMapping("/getGroomingListByStoreNo")
+    public List<GroomingVO> getGroomingListByStoreNo(@RequestParam Integer storeNo) {
+        List<GroomingVO> list = storeService.getGroomingListByStoreNo(storeNo);
         return list;
     }
 }

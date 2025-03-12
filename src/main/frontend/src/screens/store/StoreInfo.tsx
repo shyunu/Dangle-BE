@@ -6,9 +6,11 @@ import { FaRegHeart } from "react-icons/fa6";
 import { FaRegCheckCircle, FaRegCircle } from "react-icons/fa";
 import Button from "../../components/Button";
 import { useLocation, useNavigate } from "react-router-dom";
+import Carousel from "react-bootstrap/Carousel";
 import {Store} from "../../types/store";
-import {renderStars} from "../../utils/renderStars";
 import {Designer} from "../../types/designer";
+import {GroomingMenu} from "../../types/groomingMenu";
+import {renderStars} from "../../utils/renderStars";
 import axios from "axios";
 
 interface StoreImage {
@@ -21,24 +23,6 @@ const imageData: StoreImage[] = [
     { no: 2, imageUrl: "/image/store6-2.jpg" },
     { no: 3, imageUrl: "/image/store6-3.jpg" },
 ];
-
-interface GroomingMenu {
-    no: number;
-    name: string;
-    category: "기본케어" | "커트" | "스파/케어";
-    price: number;
-}
-
-const groomingMenu: GroomingMenu[] = [
-    { no: 1, name: "기본 목욕 - 소형견 (~5kg)", category: "기본케어", price: 30000 },
-    { no: 2, name: "기본 목욕 - 중형견 (~10kg)", category: "기본케어", price: 30000 },
-    { no: 3, name: "기본 목욕 - 대형견 (~10kg)", category: "기본케어", price: 30000 },
-    { no: 4, name: "전체 미용", category: "커트", price: 50000 },
-    { no: 5, name: "스페셜 스파", category: "스파/케어", price: 70000 },
-    { no: 6, name: "부분 미용", category: "커트", price: 40000 },
-];
-
-
 
 interface Review {
     no: number;
@@ -98,22 +82,42 @@ const StoreInfo: React.FC = () => {
     const store = location.state?.store as Store;
     const storeNo = store?.storeNo;
     const [selectedTab, setSelectedTab] = useState<string>("홈");
-    const [selectedCategory, setSelectedCategory] = useState("전체");
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [selectedDesigner, setSelectedDesigner] = useState<number | null>(null);
 
+    const [groomingData, setGroomingData] = useState<GroomingMenu[]>([]); // 미용메뉴 list
 
-    const filteredMenu =
-        selectedCategory === "전체" ? groomingMenu : groomingMenu.filter((item) => item.category === selectedCategory);
+    useEffect(() => {
+        axios
+            .get<GroomingMenu[]>("/store/getGroomingListByStoreNo", { params: { storeNo }})
+            .then((response) => {
+                if (Array.isArray(response.data)) {
+                    setGroomingData(response.data);
+                } else {
+                    console.error("예상하지 못한 응답 구조입니다.");
+                }
+            })
+            .catch((error) => {
+                console.error("디자이너 목록 조회 에러: ", error);
+            });
+    }, []);
+
+    const categories = Array.from(new Set(groomingData.map((item) => item.categoryName)));
+
+    const filteredGroomingData = selectedCategory
+        ? groomingData.filter((item) => item.categoryName === selectedCategory)
+        : groomingData;
+
 
     const selectDesigner = (no: number) => {
         setSelectedDesigner(selectedDesigner === no ? null : no);
     };
 
-    const [designerData, setDesignerData] = useState<Designer[]>([]);
+    const [designerData, setDesignerData] = useState<Designer[]>([]); // 디자이너 list
 
     useEffect(() => {
         axios
-            .get<Designer[]>(`http://localhost:8080/getDesignerListByStoreNo`, { params: { storeNo }})
+            .get<Designer[]>("/store/getDesignerListByStoreNo", { params: { storeNo }})
             .then((response) => {
                 console.log("서버에서 받은 데이터:", response.data); // 서버에서 받은 데이터 확인
                 if (Array.isArray(response.data)) {
@@ -171,22 +175,35 @@ const StoreInfo: React.FC = () => {
                             <p className="about-title">미용 메뉴 & 가격표</p>
                             {/* 메뉴 필터 버튼 */}
                             <div className="menu-tab-wrap">
-                                {["전체", "기본케어", "커트", "스파/케어"].map((tab) => (
-                                    <button
-                                        key={tab}
-                                        className={`menu-tab ${selectedCategory === tab ? "active" : ""}`}
-                                        onClick={() => setSelectedCategory(tab)}
-                                    >
-                                        {tab}
-                                    </button>
-                                ))}
+                                <Carousel indicators={false} interval={null} touch={true} wrap={true}>
+                                    <Carousel.Item>
+                                        <div className="menu-tab-container">
+                                            <button
+                                                className={`menu-tab ${selectedCategory === null ? "active" : ""}`}
+                                                onClick={() => setSelectedCategory(null)}
+                                            >
+                                                전체
+                                            </button>
+                                            {categories.map((category) => (
+                                                <button
+                                                    key={category}
+                                                    className={`menu-tab ${selectedCategory === category ? "active" : ""}`}
+                                                    onClick={() => setSelectedCategory(category)}
+                                                >
+                                                    {category}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </Carousel.Item>
+                                </Carousel>
                             </div>
-                            {/* 메뉴 리스트 */}
+
+                            {/* 필터링된 메뉴 리스트 */}
                             <div>
-                                {filteredMenu.map((item) => (
-                                    <div key={item.no} className="menu-price-wrap">
-                                        <p>{item.name}</p>
-                                        <p>{item.price.toLocaleString()}원</p>
+                                {filteredGroomingData.map((grooming) => (
+                                    <div key={grooming.groomingNo} className="menu-price-wrap">
+                                        <p>{grooming.groomingName}</p>
+                                        <p>{grooming.groomingPrice.toLocaleString()}원</p>
                                     </div>
                                 ))}
                             </div>
