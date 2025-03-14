@@ -6,13 +6,14 @@ import { FaRegHeart } from "react-icons/fa6";
 import { FaRegCheckCircle, FaRegCircle } from "react-icons/fa";
 import Button from "../../components/Button";
 import { useLocation, useNavigate } from "react-router-dom";
-import Carousel from "react-bootstrap/Carousel";
 import {Store} from "../../types/store";
 import {Designer} from "../../types/designer";
 import {GroomingMenu} from "../../types/groomingMenu";
 import {renderStars} from "../../utils/renderStars";
 import {Review} from "../../types/review";
 import axios from "axios";
+import { useRef } from "react";
+import {formatDate} from "../../utils/formatDate";
 
 interface StoreImage {
     no: number;
@@ -33,6 +34,35 @@ const StoreInfo: React.FC = () => {
     const [selectedTab, setSelectedTab] = useState<string>("홈");
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [selectedDesigner, setSelectedDesigner] = useState<number | null>(null);
+
+    const handleCategoryClick = (category: string) => {
+        setSelectedCategory(category);
+
+        // 선택된 버튼으로 가로 스크롤 이동
+        const selectedButton = document.getElementById(`category-${category}`);
+        selectedButton?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    };
+
+    const menuRef = useRef<HTMLDivElement | null>(null);
+
+    const handleDragScroll = (event: React.MouseEvent) => {
+        if (!menuRef.current) return;
+        let startX = event.pageX;
+        let scrollLeft = menuRef.current.scrollLeft;
+
+        const onMouseMove = (moveEvent: MouseEvent) => {
+            const walk = (moveEvent.pageX - startX) * 2; // 드래그 속도 조절
+            menuRef.current!.scrollLeft = scrollLeft - walk;
+        };
+
+        const onMouseUp = () => {
+            window.removeEventListener("mousemove", onMouseMove);
+            window.removeEventListener("mouseup", onMouseUp);
+        };
+
+        window.addEventListener("mousemove", onMouseMove);
+        window.addEventListener("mouseup", onMouseUp);
+    };
 
     // 미용메뉴 list
     const [groomingData, setGroomingData] = useState<GroomingMenu[]>([]);
@@ -140,28 +170,25 @@ const StoreInfo: React.FC = () => {
                         <div className="about-menu">
                             <p className="about-title">미용 메뉴 & 가격표</p>
                             {/* 메뉴 필터 버튼 */}
-                            <div className="menu-tab-wrap">
-                                <Carousel indicators={false} interval={null} touch={true} wrap={true}>
-                                    <Carousel.Item>
-                                        <div className="menu-tab-container">
-                                            <button
-                                                className={`menu-tab ${selectedCategory === null ? "active" : ""}`}
-                                                onClick={() => setSelectedCategory(null)}
-                                            >
-                                                전체
-                                            </button>
-                                            {categories.map((category) => (
-                                                <button
-                                                    key={category}
-                                                    className={`menu-tab ${selectedCategory === category ? "active" : ""}`}
-                                                    onClick={() => setSelectedCategory(category)}
-                                                >
-                                                    {category}
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </Carousel.Item>
-                                </Carousel>
+                            <div className="menu-tab-wrap" ref={menuRef} onMouseDown={handleDragScroll}>
+                                <div className="menu-tab-container">
+                                    <button
+                                        className={`menu-tab ${selectedCategory === null ? "active" : ""}`}
+                                        onClick={() => setSelectedCategory(null)}
+                                    >
+                                        전체
+                                    </button>
+                                    {categories.map((category) => (
+                                        <button
+                                            key={category}
+                                            id={`category-${category}`} // 각 버튼에 ID 추가
+                                            className={`menu-tab ${selectedCategory === category ? "active" : ""}`}
+                                            onClick={() => handleCategoryClick(category)}
+                                        >
+                                            {category}
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
 
                             {/* 필터링된 메뉴 리스트 */}
@@ -212,7 +239,7 @@ const StoreInfo: React.FC = () => {
                                     <div key={review.reviewNo} className="review-box-wrap">
                                         <div className="review-date-star">
                                             <p>
-                                                {review.reviewDate}
+                                                {formatDate(review.reviewDate)}
                                             </p>
                                             <div className="review-rating">{renderStars(review.reviewScore)}</div>
                                         </div>
@@ -220,7 +247,7 @@ const StoreInfo: React.FC = () => {
                                             {review.userId}님 ({review.petName} 보호자님)
                                         </p>
                                         <p className="review-designer-grooming">
-                                            {review.designerRole} {review.designerName} | {review.groomingName}
+                                            {review.designerRole} {review.designerName} | {review.categoryName} ({review.groomingName})
                                         </p>
                                         <img src={review.imageUrl} />
                                         <p className="review-content">{review.reviewContent}</p>
