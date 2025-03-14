@@ -2,6 +2,7 @@ package com.project.dangle.store;
 
 import com.project.dangle.command.DesignerVO;
 import com.project.dangle.command.GroomingVO;
+import com.project.dangle.command.ReviewVO;
 import com.project.dangle.command.StoreVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,13 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public List<GroomingVO> getGroomingListByStoreNo(Integer storeNo) {
         List<GroomingVO> list = storeMapper.getGroomingListByStoreNo(storeNo);
+        return list;
+    }
+
+    // 리뷰조회
+    @Override
+    public List<ReviewVO> getReviewListByStoreNo(Integer storeNo) {
+        List<ReviewVO> list = storeMapper.getReviewListByStoreNo(storeNo);
         return list;
     }
 }
