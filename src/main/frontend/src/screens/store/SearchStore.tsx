@@ -17,13 +17,13 @@ const SearchStore: React.FC = () => {
         navigation("/storeInfo", { state: { store } });
     };
 
+    // 매장데이터
     const [storeData, setStoreData] = useState<Store[]>([]);
-
     useEffect(() => {
         axios
             .get<Store[]>("/store/getStoreList")
             .then((response) => {
-                console.log("서버에서 받은 데이터:", response.data); // 서버에서 받은 데이터 확인
+                console.log("매장list 데이터:", response.data); // 서버에서 받은 데이터 확인
                 if (Array.isArray(response.data)) {
                     setStoreData(response.data);
                 } else {

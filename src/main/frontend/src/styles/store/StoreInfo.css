@@ -103,10 +103,6 @@
   scroll-behavior: smooth; /* 부드러운 스크롤 */
   -webkit-overflow-scrolling: touch; /* 모바일 터치 스크롤 지원 */
 }
-/* 스크롤바 숨기기 (크롬, 사파리) */
-.menu-tab-wrap::-webkit-scrollbar {
-  display: none;
-}
 .menu-tab {
   padding: 10px;
   border: 1px solid #ddd;
@@ -125,9 +121,6 @@
 .menu-tab.active {
   background: #a8caba;
   font-weight: bold;
-}
-.menu-tab-wrap .carousel-control-next, .carousel-control-prev {
-  color: #000;
 }
 .menu-tab-container {
   width: 100%;
