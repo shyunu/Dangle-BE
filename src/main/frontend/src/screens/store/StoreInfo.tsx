@@ -11,6 +11,7 @@ import {Store} from "../../types/store";
 import {Designer} from "../../types/designer";
 import {GroomingMenu} from "../../types/groomingMenu";
 import {renderStars} from "../../utils/renderStars";
+import {Review} from "../../types/review";
 import axios from "axios";
 
 interface StoreImage {
@@ -24,58 +25,6 @@ const imageData: StoreImage[] = [
     { no: 3, imageUrl: "/image/store6-3.jpg" },
 ];
 
-interface Review {
-    no: number;
-    id: string; // 회원아이디
-    pet: string; // 반려동물 이름
-    date: Date; // 리뷰등록일
-    rating: number; // 별점
-    designerRole: string; // 디자이너 직책
-    designerName: string; // 디자이너 이름
-    groomingName: string; // 미용시술명
-    imageUrl: string; // 이미지 경로
-    content: string; // 리뷰 내용
-}
-
-const reviewList: Review[] = [
-    {
-        no: 1,
-        id: "shyunu",
-        pet: "별이",
-        date: new Date(2025, 1, 7), // 2025년 2월 7일 (월은 0부터 시작)
-        rating: 4.5,
-        designerRole: "원장",
-        designerName: "김수현",
-        groomingName: "기본 가위컷 3mm",
-        imageUrl: "/image/review1.jpg",
-        content: "별이가 너무 예뻐졌어요! 디자이너님 최고예요. 다음에도 또 방문할게요!",
-    },
-    {
-        no: 2,
-        id: "yuna92",
-        pet: "초코",
-        date: new Date(2025, 1, 5),
-        rating: 3.5,
-        designerRole: "디자이너",
-        designerName: "강해린",
-        groomingName: "피부 각질 스파관리",
-        imageUrl: "/image/review2.jpg",
-        content: "초코가 스트레스 없이 잘 미용받았어요! 친절한 서비스 감사합니다 😊",
-    },
-    {
-        no: 3,
-        id: "happyDog33",
-        pet: "몽이",
-        date: new Date(2025, 1, 3),
-        rating: 4.5,
-        designerRole: "원장",
-        designerName: "김수현",
-        groomingName: "포메 곰돌이컷",
-        imageUrl: "/image/review3.jpg",
-        content: "몽이가 너무 귀엽게 변했어요! 추천합니다!",
-    },
-];
-
 const StoreInfo: React.FC = () => {
     const location = useLocation();
     const navigation = useNavigate();
@@ -85,8 +34,8 @@ const StoreInfo: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [selectedDesigner, setSelectedDesigner] = useState<number | null>(null);
 
-    const [groomingData, setGroomingData] = useState<GroomingMenu[]>([]); // 미용메뉴 list
-
+    // 미용메뉴 list
+    const [groomingData, setGroomingData] = useState<GroomingMenu[]>([]);
     useEffect(() => {
         axios
             .get<GroomingMenu[]>("/store/getGroomingListByStoreNo", { params: { storeNo }})
@@ -113,13 +62,13 @@ const StoreInfo: React.FC = () => {
         setSelectedDesigner(selectedDesigner === no ? null : no);
     };
 
-    const [designerData, setDesignerData] = useState<Designer[]>([]); // 디자이너 list
-
+    // 디자이너 list
+    const [designerData, setDesignerData] = useState<Designer[]>([]);
     useEffect(() => {
         axios
             .get<Designer[]>("/store/getDesignerListByStoreNo", { params: { storeNo }})
             .then((response) => {
-                console.log("서버에서 받은 데이터:", response.data); // 서버에서 받은 데이터 확인
+                console.log("디자이너 데이터:", response.data);
                 if (Array.isArray(response.data)) {
                     setDesignerData(response.data);
                 } else {
@@ -128,6 +77,23 @@ const StoreInfo: React.FC = () => {
             })
             .catch((error) => {
                 console.error("디자이너 목록 조회 에러: ", error);
+            });
+    }, []);
+
+    // 리뷰 list
+    const [reviewData, setReviewData] = useState<Review[]>([]);
+    useEffect(() => {
+        axios
+            .get<Review[]>("/store/getReviewListByStoreNo", { params: { storeNo } })
+            .then((response) => {
+                if (Array.isArray(response.data)) {
+                    setReviewData(response.data);
+                } else {
+                    console.error("예상하지 못한 응답 구조입니다.");
+                }
+            })
+            .catch((error) => {
+                console.error("리뷰 목록 조회 에러: ", error);
             });
     }, []);
 
@@ -242,24 +208,22 @@ const StoreInfo: React.FC = () => {
                         <div className="about-review">
                             <p className="about-title">고객 후기</p>
                             <div className="review-container">
-                                {reviewList.map((review) => (
-                                    <div key={review.no} className="review-box-wrap">
+                                {reviewData.map((review) => (
+                                    <div key={review.reviewNo} className="review-box-wrap">
                                         <div className="review-date-star">
                                             <p>
-                                                {review.date
-                                                    .toLocaleDateString("ko-KR", { year: "numeric", month: "2-digit", day: "2-digit" })
-                                                    .replace(/\.$/, "")}
+                                                {review.reviewDate}
                                             </p>
-                                            <div className="review-rating">{renderStars(review.rating)}</div>
+                                            <div className="review-rating">{renderStars(review.reviewScore)}</div>
                                         </div>
                                         <p className="review-id">
-                                            {review.id}님 ({review.pet} 보호자님)
+                                            {review.userId}님 ({review.petName} 보호자님)
                                         </p>
                                         <p className="review-designer-grooming">
                                             {review.designerRole} {review.designerName} | {review.groomingName}
                                         </p>
                                         <img src={review.imageUrl} />
-                                        <p className="review-content">{review.content}</p>
+                                        <p className="review-content">{review.reviewContent}</p>
                                     </div>
                                 ))}
                             </div>

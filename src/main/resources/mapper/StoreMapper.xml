@@ -97,4 +97,45 @@
         WHERE GM.STORE_NO = #{storeNo}
         ORDER BY GM.GROOMING_NO ASC;
     </select>
+
+    <resultMap id="reviewResultMap" type="com.project.dangle.command.ReviewVO">
+        <result property="reviewNo" column="REVIEW_NO"/>
+        <result property="reviewDate" column="REVIEW_DATE"/>
+        <result property="reviewScore" column="REVIEW_SCORE"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="petName" column="PET_NAME"/>
+        <result property="designerRole" column="DESIGNER_ROLE"/>
+        <result property="designerName" column="DESIGNER_NAME"/>
+        <result property="categoryName" column="CATEGORY_NAME"/>
+        <result property="groomingName" column="GROOMING_NAME"/>
+        <result property="imageUrl" column="IMAGE_URL"/>
+        <result property="reviewContent" column="REVIEW_CONTENT"/>
+    </resultMap>
+    <!-- 리뷰조회 -->
+    <select id="getReviewListByStoreNo" resultMap="reviewResultMap">
+        SELECT
+            R.REVIEW_DATE,
+            R.REVIEW_SCORE,
+            U.USER_ID,
+            P.PET_NAME,
+            D.DESIGNER_ROLE,
+            D.DESIGNER_NAME,
+            GC.CATEGORY_NAME,
+            GM.GROOMING_NAME,
+            R.REVIEW_CONTENT
+        FROM PET AS P
+        INNER JOIN USERS AS U
+        ON P.USER_NO = U.USER_NO
+        INNER JOIN REVIEW AS R
+        ON U.USER_NO = R.USER_NO
+        INNER JOIN STORE AS S
+        ON R.STORE_NO = S.STORE_NO
+        INNER JOIN DESIGNER AS D
+        ON S.STORE_NO = D.STORE_NO
+        INNER JOIN GROOMING_MENU AS GM
+        ON S.STORE_NO = GM.STORE_NO
+        INNER JOIN GROOMING_CATEGORY AS GC
+        ON GM.CATEGORY_NO = GC.CATEGORY_NO
+        WHERE R.STORE_NO = #{storeNo};
+    </select>
 </mapper>
