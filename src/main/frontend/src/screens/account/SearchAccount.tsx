@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../../styles/account/SearchAccount.css";
 import Button from "../../components/Button";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SearchAccount: React.FC = () => {
     const navigation = useNavigate();
@@ -13,11 +14,25 @@ const SearchAccount: React.FC = () => {
         setSelectedOption(e);
     };
 
-    const handleNavigation = () => {
+    const [userId, setUserId] = useState("");
+    const [userPhone, setUserPhone] = useState("");
+
+    const handleNavigation = async () => {
         if (isFindId) {
             navigation("/foundId");
         } else {
-            navigation("/resetPw");
+            try {
+                const response = await axios.post("/account/findAccountForPw", { userId, userPhone });
+
+                if(response.data === "계정확인완료") {
+                    navigation("/resetPw", { state : { userId, userPhone } });
+                } else {
+                    alert(response.data);
+                }
+            } catch (error) {
+                console.error("에러발생:", error);
+                alert("비밀번호찾기 서버연결에 문제 발생함")
+            }
         }
     };
 
@@ -80,9 +95,9 @@ const SearchAccount: React.FC = () => {
                     <>
                         <div className="pwContainer">
                             <p>아이디</p>
-                            <input placeholder="아이디를 입력해주세요." />
+                            <input type="text" placeholder="아이디를 입력해주세요." value={userId} onChange={(e) => setUserId(e.target.value)} />
                             <p>전화번호</p>
-                            <input placeholder="전화번호를 입력해주세요." />
+                            <input type="text" placeholder="전화번호를 입력해주세요." value={userPhone} onChange={(e) => setUserPhone(e.target.value)} />
                         </div>
                     </>
                 )}

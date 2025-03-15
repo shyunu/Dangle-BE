@@ -125,7 +125,7 @@ const JoinForm: React.FC = () => {
         };
 
         try {
-            const response = await axios.post("/joinForm", formattedAccountVO);
+            const response = await axios.post("/account/joinForm", formattedAccountVO);
 
             if (response.data) {
                 console.log("회원가입 성공:", response.data);
