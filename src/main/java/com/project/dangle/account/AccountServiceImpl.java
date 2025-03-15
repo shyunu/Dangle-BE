@@ -10,8 +10,27 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountMapper accountMapper;
 
+    // 회원가입
     @Override
     public void joinForm(AccountVO vo) {
         accountMapper.joinForm(vo);
+    }
+
+    // 계정조회 (비밀번호 찾기 - 아이디/전화번호로 찾기)
+    @Override
+    public boolean findAccountForPw(AccountVO vo) {
+        int count = accountMapper.findAccountForPw(vo.getUserId(), vo.getUserPhone());
+        return count > 0;
+    }
+
+    // 비밀번호 재설정
+    @Override
+    public boolean resetPw(AccountVO vo) {
+        boolean isUserExist = accountMapper.findAccountForPw(vo.getUserId(), vo.getUserPhone()) > 0;
+        if (isUserExist) {
+            accountMapper.updatePassword(vo);
+            return true;
+        }
+        return false;
     }
 }

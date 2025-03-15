@@ -1,34 +1,45 @@
 import React, { useState } from "react";
 import Button from "../../components/Button";
-import { useNavigate } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import "../../styles/account/ResetPw.css";
+import axios from "axios";
 
 const ResetPw: React.FC = () => {
     const navigation = useNavigate();
-    const [password, setPassword] = useState<string | null>(null);
+    const location = useLocation();
+    const { userId, userPhone } = location.state || {}; // SearchAccount에서 전달된 userId와 userPhone 받기
+    const [newPassword, setNewPassword] = useState<string | null>(null);
     const [confirmPassword, setConfirmPassword] = useState<string | null>(null);
 
-    const handleResetPw = () => {
-        if (password !== confirmPassword) {
-            alert("비밀번호가 일치하지 않습니다");
+    const handleResetPw = async () => {
+        if (!newPassword || !confirmPassword) {
+            alert("비밀번호를 입력해주세요.");
+            return;
+        }
+
+        if (newPassword !== confirmPassword) {
+            alert("비밀번호가 일치하지 않습니다.");
             setConfirmPassword("");
             return;
         }
 
-        if (password === null || confirmPassword === null) {
-            alert("비밀번호를 입력해주세요.");
-            return;
+        try {
+            const response = await axios.post("/account/resetPw", {
+                userId,
+                userPhone,
+                userPw: newPassword,  // 비밀번호 추가
+            });
+
+            if (response.data === "비밀번호 재설정이 완료되었습니다.") {
+                alert(response.data);  // 비밀번호 재설정 완료 메시지 표시
+                navigation("/login");  // 로그인 페이지로 이동
+            } else {
+                alert(response.data);  // 오류 메시지 표시
+            }
+        } catch (error) {
+            console.error("에러 발생:", error);
+            alert("서버와의 연결에 문제가 발생했습니다.");
         }
-        alert("비밀번호를 재설정하였습니다.");
-        navigation("/login")
-    };
-
-    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.target.value);
-    };
-
-    const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setConfirmPassword(e.target.value);
     };
 
     return (
@@ -45,11 +56,11 @@ const ResetPw: React.FC = () => {
             <div className="reset-pw-container">
                 <div className="pw-first-reset">
                     <p>새로운 비밀번호를 입력해주세요.</p>
-                    <input type="password" value={password || ""} onChange={handlePasswordChange} />
+                    <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
                     <p className="reset-info">✱ 영문, 숫자, 특수문자 조합 8~20자리로 입력해주세요.</p>
                 </div>
                 <div className="pw-second-reset">
-                    <input type="password" value={confirmPassword || ""} onChange={handleConfirmPasswordChange} />
+                    <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                     <p className="reset-info">✱ 비밀번호를 다시 입력해주세요.</p>
                 </div>
             </div>
