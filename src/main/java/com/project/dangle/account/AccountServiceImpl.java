@@ -16,6 +16,18 @@ public class AccountServiceImpl implements AccountService {
         accountMapper.joinForm(vo);
     }
 
+    // 아이디 찾기(1) - 이메일로 찾기
+    @Override
+    public String findIdByEmail(AccountVO vo) {
+        return accountMapper.findIdByEmail(vo.getUserEmail());
+    }
+
+    // 아이디 찾기(2) - 이름/전화번호로 찾기
+    @Override
+    public String findIdByNameAndPhone(AccountVO vo) {
+        return accountMapper.findIdByNameAndPhone(vo.getUserName(), vo.getUserPhone());
+    }
+
     // 계정조회 (비밀번호 찾기 - 아이디/전화번호로 찾기)
     @Override
     public boolean findAccountForPw(AccountVO vo) {

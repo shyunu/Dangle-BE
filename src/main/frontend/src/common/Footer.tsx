@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
                 <Link to={"/reservationList"}>
                     <FaRegCalendarCheck className="calendar" />
                 </Link>
-                <Link to="/profile">
+                <Link to="/login">
                     <RiAccountCircleLine className="account" />
                 </Link>
             </div>

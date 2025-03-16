@@ -1,10 +1,12 @@
 import React from "react";
 import "../../styles/account/FoundId.css";
 import Button from "../../components/Button";
-import { useNavigate } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const FoundId: React.FC = () => {
     const navigation = useNavigate();
+    const location = useLocation();
+    const foundId = location.state?.foundId || "";
 
     return (
         <div className="searchContainer">
@@ -19,8 +21,10 @@ const FoundId: React.FC = () => {
 
             <div className="idInfoWrap">
                 <p>아이디 찾기가 완료되었습니다.</p>
-                <input placeholder="shyunu" />
+                <input value={foundId} readOnly />
             </div>
+
+
 
             <div className="buttonContainer-id">
                 <Button text="로그인" className="gray-button-m" onClick={() => navigation("/login")} />
