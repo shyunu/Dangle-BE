@@ -13,6 +13,17 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
+    // 로그인
+    @PostMapping("/login")
+    public String login(@RequestBody AccountVO vo) {
+        boolean isLoginSuccess = accountService.login(vo);
+        if (isLoginSuccess) {
+            return "로그인 성공";
+        } else {
+            return "아이디 또는 비밀번호가 일치하지 않습니다.";
+        }
+    }
+
     // 회원가입
     @PostMapping("/joinForm")
     public String joinForm(@RequestBody AccountVO vo) {

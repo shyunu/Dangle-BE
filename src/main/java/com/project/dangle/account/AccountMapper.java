@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface AccountMapper {
 
+    int checkLogin(@Param("userId") String userId, @Param("userPw") String userPw); // 로그인 시 계정 유무 확인
     void joinForm(AccountVO vo); // 회원가입
     String findIdByEmail(@Param("userEmail") String userEmail); // 아이디 찾기(1) - 이메일로 찾기
     String findIdByNameAndPhone(@Param("userName") String userName, @Param("userPhone") String userPhone); // 아이디 찾기(2) - 이름/전화번호로 찾기

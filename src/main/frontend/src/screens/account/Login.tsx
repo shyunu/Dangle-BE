@@ -3,19 +3,32 @@ import "../../styles/account/Login.css";
 import { FcGoogle } from "react-icons/fc";
 import { SiKakao, SiNaver } from "react-icons/si";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login: React.FC = () => {
     const navigation = useNavigate();
-    const [id, setId] = useState<string>("");
-    const [pw, setPw] = useState<string>("");
+    const [userId, setUserId] = useState<string>("");
+    const [userPw, setUserPw] = useState<string>("");
 
-    const loginButton = () => {
-        if (id === "") {
+    const loginButton = async () => {
+        if (userId === "") {
             alert("아이디를 입력해주세요.");
-        } else if (pw === "") {
+        } else if (userPw === "") {
             alert("비밀번호를 입력해주세요.");
         } else {
-            navigation("/home");
+            try {
+                const response = await axios.post("/account/login", { userId, userPw });
+
+                if (response.data === "로그인 성공") {
+                    sessionStorage.setItem("userId", userId);
+                    navigation("/home");
+                } else {
+                    alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+                }
+            } catch (error) {
+                console.error("로그인 요청 중 오류 발생:", error);
+                alert("서버와의 연결에 문제가 발생했습니다.");
+            }
         }
     };
     return (
@@ -24,9 +37,9 @@ const Login: React.FC = () => {
             <div>로그인</div>
             <div className="login-info">
                 <p>아이디</p>
-                <input value={id} onChange={(e) => setId(e.target.value)} />
+                <input value={userId} onChange={(e) => setUserId(e.target.value)} />
                 <p>비밀번호</p>
-                <input value={pw} onChange={(e) => setPw(e.target.value)} />
+                <input value={userPw} onChange={(e) => setUserPw(e.target.value)} />
             </div>
             <div className="loginButton">
                 <button onClick={loginButton}>로그인</button>

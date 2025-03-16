@@ -10,6 +10,13 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountMapper accountMapper;
 
+    // 로그인
+    @Override
+    public boolean login(AccountVO vo) {
+        int count = accountMapper.checkLogin(vo.getUserId(), vo.getUserPw());
+        return count > 0;
+    }
+
     // 회원가입
     @Override
     public void joinForm(AccountVO vo) {
