@@ -21,6 +21,20 @@ public class AccountController {
         return "redirect:/joinComplete";
     }
 
+    // 아이디 찾기(1) - 이메일로 찾기
+    @PostMapping("/findIdByEmail")
+    public String findIdByEmail(@RequestBody AccountVO vo) {
+        String foundId = accountService.findIdByEmail(vo);
+        return (foundId != null) ? foundId : "해당 이메일로 등록된 아이디가 없습니다.";
+    }
+
+    // 아이디 찾기(2) - 이름/전화번호로 찾기
+    @PostMapping("/findIdByNameAndPhone")
+    public String findIdByNameAndPhone(@RequestBody AccountVO vo) {
+        String foundId = accountService.findIdByNameAndPhone(vo);
+        return (foundId != null) ? foundId : "해당 이름/전화번호와 일치하는 계정이 없습니다.";
+    }
+
     // 계정조회 (비밀번호 찾기 - 아이디/전화번호로 찾기)
     @PostMapping("/findAccountForPw")
     public String findAccountForPw(@RequestBody AccountVO vo) {

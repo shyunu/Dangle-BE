@@ -34,6 +34,20 @@
                          )
     </insert>
 
+    <!-- 아이디 찾기(1) - 이메일로 찾기 -->
+    <select id="findIdByEmail" parameterType="String" resultType="String">
+        SELECT USER_ID
+        FROM USERS
+        WHERE USER_EMAIL = #{userEmail}
+    </select>
+
+    <!-- 아이디 찾기(2) - 이름/전화번호로 찾기 -->
+    <select id="findIdByNameAndPhone" parameterType="map" resultType="String">
+        SELECT USER_ID
+        FROM USERS
+        WHERE USER_NAME = #{userName} AND USER_PHONE = #{userPhone}
+    </select>
+
     <!-- 사용자 존재 여부 확인 -->
     <select id="findAccountForPw" parameterType="AccountVO" resultType="int">
         SELECT COUNT(*)
