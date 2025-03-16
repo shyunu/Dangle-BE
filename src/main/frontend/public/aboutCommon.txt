@@ -58,6 +58,8 @@
 * 예약완료 : import { FaRegCircleCheck } from "react-icons/fa6";
 * 예약취소 : import { FaRegCircleXmark } from "react-icons/fa6";
 * 이모티콘(하트) : import { PiHeartFill } from "react-icons/pi";
+* 라디오인풋(기본) : import { IoMdRadioButtonOff } from "react-icons/io";
+* 라디오인풋(선택됨) : import { IoMdRadioButtonOn } from "react-icons/io";
 
 < bootstrap >
 * 아코디언 : import Accordion from "react-bootstrap/Accordion";
