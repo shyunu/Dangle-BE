@@ -5,6 +5,13 @@
 
 <mapper namespace="com.project.dangle.account.AccountMapper">
 
+    <!-- 로그인 시 계정 유무 확인 -->
+    <select id="checkLogin" parameterType="map" resultType="int">
+        SELECT COUNT(*)
+        FROM USERS
+        WHERE USER_ID = #{userId} AND USER_PW = #{userPw}
+    </select>
+
     <!-- 회원가입 -->
     <insert id="joinForm" parameterType="AccountVO">
         INSERT INTO users (
