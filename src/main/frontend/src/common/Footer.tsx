@@ -8,6 +8,8 @@ import { RiAccountCircleLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
+    const userId = sessionStorage.getItem("userId");
+
     return (
         <div className="footerContainer">
             <div className="tabContainer">
@@ -18,11 +20,10 @@ const Footer: React.FC = () => {
                 <Link to={"/searchStore"}>
                     <IoSearchSharp className="search" />
                 </Link>
-                {/* <BiHeartCircle className="heart" /> */}
-                <Link to={"/reservationList"}>
+                <Link to={userId ? "/reservationList" : "/login"}>
                     <FaRegCalendarCheck className="calendar" />
                 </Link>
-                <Link to="/login">
+                <Link to="/profile">
                     <RiAccountCircleLine className="account" />
                 </Link>
             </div>

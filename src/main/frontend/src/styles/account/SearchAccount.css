@@ -83,6 +83,12 @@
   font-size: 12px;
   font-weight: 100;
 }
+.searchWrap input:focus {
+  outline: none;
+  border-color: #a8caba;
+  box-shadow: 0 0 8px rgba(168, 202, 186, 0.5);
+}
+
 .emailContainer > input:focus,
 .phoneContainer > input:focus {
   outline: none;
