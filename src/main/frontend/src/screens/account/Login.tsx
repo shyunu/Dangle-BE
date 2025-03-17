@@ -31,15 +31,21 @@ const Login: React.FC = () => {
             }
         }
     };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            loginButton();
+        }
+    };
     return (
         <div className="loginContainer">
             <div>DangleDangle</div>
             <div>로그인</div>
             <div className="login-info">
                 <p>아이디</p>
-                <input value={userId} onChange={(e) => setUserId(e.target.value)} />
+                <input value={userId} onChange={(e) => setUserId(e.target.value)} onKeyDown={handleKeyDown} />
                 <p>비밀번호</p>
-                <input value={userPw} onChange={(e) => setUserPw(e.target.value)} />
+                <input value={userPw} onChange={(e) => setUserPw(e.target.value)} onKeyDown={handleKeyDown} />
             </div>
             <div className="loginButton">
                 <button onClick={loginButton}>로그인</button>

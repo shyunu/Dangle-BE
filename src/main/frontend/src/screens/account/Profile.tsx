@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/account/Profile.css";
 import Button from "../../components/Button";
 import { PiHeartFill } from "react-icons/pi";
@@ -12,27 +12,26 @@ interface ProfileLogProps {
     setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Profile: React.FC<ProfileLogProps> = ({ isLogin, setIsLogin }) => {
+const Profile: React.FC<ProfileLogProps> = () => {
     const navigation = useNavigate();
-    const handleLogState = () => {
-        setIsLogin((prev) => !prev);
-    };
+    const [userId, setUserId] = useState<string | null>(null);
 
     useEffect(() => {
-        console.log("현재 로그인 상태:", isLogin);
+        setUserId(sessionStorage.getItem("userId"));
+    }, []);
 
-        // if (!isLogin) {
-        //   navigation("/login");
-        // }
-        // }, [isLogin, navigation]);
-    }, [isLogin]);
+    const handleLogout = () => {
+        sessionStorage.removeItem("userId");
+        setUserId(null);
+        navigation("/profile");
+    };
 
     return (
         <div className="profile-mypage-container">
             <p className="profile-mypage-title">마이페이지</p>
             <div className="profile-border"></div>
             <div className="profile-image-wrap">
-                {isLogin ? (
+                {userId ? (
                     <>
                         <img src="./image/profile1.jpg" alt="profile-img" />
                         <div className="profile-name">
@@ -46,7 +45,7 @@ const Profile: React.FC<ProfileLogProps> = ({ isLogin, setIsLogin }) => {
                             </div>
                         </div>
                         <div className="profile-log-btn">
-                            <Button text="로그아웃" className="pink-button-s" onClick={handleLogState} />
+                            <Button text="로그아웃" className="pink-button-s" onClick={handleLogout} />
                         </div>
                     </>
                 ) : (
@@ -62,7 +61,7 @@ const Profile: React.FC<ProfileLogProps> = ({ isLogin, setIsLogin }) => {
                             </div>
                         </div>
                         <div className="profile-log-btn">
-                            <Button text="로그인" className="green-button-s" onClick={handleLogState} />
+                            <Button text="로그인" className="green-button-s" onClick={() => navigation("/login")} />
                         </div>
                     </>
                 )}
