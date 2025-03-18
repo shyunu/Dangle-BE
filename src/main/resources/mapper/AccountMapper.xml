@@ -69,5 +69,11 @@
         WHERE USER_ID = #{userId}
     </update>
 
+    <!-- 로그인한 계정정보 조회 -->
+    <select id="getProfile" parameterType="string" resultType="string">
+        SELECT USER_NAME
+        FROM USERS
+        WHERE USER_ID = #{userId}
+    </select>
 
 </mapper>

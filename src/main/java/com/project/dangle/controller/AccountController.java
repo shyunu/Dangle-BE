@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/account")
 public class AccountController {
@@ -66,5 +68,14 @@ public class AccountController {
         } else {
             return "아이디 또는 전화번호를 다시 입력해주세요";
         }
+    }
+
+    // 로그인한 계정정보 조회
+    @GetMapping("/profile")
+    public List<String> profile(@RequestParam String userId) {
+//        System.out.println("요청된 userId: " + userId);
+        List<String> list = accountService.getProfile(userId);
+//        System.out.println("조회된 프로필: " + list);
+        return list;
     }
 }
