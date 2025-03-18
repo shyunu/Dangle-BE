@@ -1,52 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/reservation/ReservationList.css";
 import { FaRegCircleCheck, FaRegCircleXmark } from "react-icons/fa6";
+import { PiSpinnerGap } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import { getRemainingDays } from "../../utils/remainingDate";
-
-export interface Reservation {
-    no: number;
-    name: string;
-    date: Date;
-    menu: string;
-    designerName: string;
-    designerRole: string;
-    status: "완료" | "대기" | "취소";
-}
-
-const reservationList: Reservation[] = [
-    {
-        no: 1,
-        name: "몽이네",
-        date: new Date(2025, 1, 27), // 달은 +1 -> 2월
-        menu: "기본 가위컷 (3mm)",
-        designerName: "김수현",
-        designerRole: "원장",
-        status: "대기",
-    },
-    {
-        no: 2,
-        name: "반듯하개",
-        date: new Date(2024, 11, 18),
-        menu: "기본 목욕",
-        designerName: "강해린",
-        designerRole: "디자이너",
-        status: "완료",
-    },
-    {
-        no: 3,
-        name: "도다미네",
-        date: new Date(2024, 7, 24),
-        menu: "피부관리스파",
-        designerName: "박소영",
-        designerRole: "디자이너",
-        status: "취소",
-    },
-];
+import { formatDate } from "../../utils/formatDate";
+import { FilterReservationSelect } from "../../components/CustomDropdown";
+import { Reservation } from "../../types/reservation";
+import axios from "axios";
 
 const ReservationList: React.FC = () => {
     const navigation = useNavigate();
+    const userId = sessionStorage.getItem("userId");
 
+    // 예약내역 list
+    const [reservationList, setReservationList] = useState<Reservation[]>([]);
+    useEffect(() => {
+        axios
+            .get<Reservation[]>("/reservation/list", { params: { userId } })
+            .then((response) => {
+                if (Array.isArray(response.data)) {
+                    setReservationList(response.data);
+                } else {
+                    console.error("예상치 못한 응답 구조입니다(예약내역)");
+                }
+            })
+            .catch((error) => {
+                console.error("예약내역 조회 에러: ", error);
+            });
+    }, []);
+
+    // 상세보기 버튼
     const handleReservationClick = (reservation: Reservation) => {
         navigation("/reservationDetail", { state: { reservation } });
     };
@@ -57,33 +41,35 @@ const ReservationList: React.FC = () => {
             <div className="store-info-border"></div>
             <div className="count-filter-wrap">
                 <p>총 {reservationList.length}건</p>
-                <select>
-                    <option>기본순</option>
-                    <option>최신순</option>
-                    <option>오래된순</option>
-                </select>
+                <FilterReservationSelect />
             </div>
 
             <div className="reservation-list-wrap">
                 {reservationList.map((reservation) => (
-                    <div key={reservation.no} className="reservation-box">
+                    <div key={reservation.reservationNo} className="reservation-box">
                         <div className="reservation-list-name-status">
-                            <p>{reservation.name}</p>
-                            {reservation.status === "완료" ? (
-                                <FaRegCircleCheck />
-                            ) : reservation.status === "대기" ? (
-                                <p>D-{getRemainingDays(reservation.date)}</p>
-                            ) : (
+                            <p>{reservation.storeName}</p>
+                            {reservation.reservationStatusName === "waiting_for_reservation" ? (
+                                <PiSpinnerGap />
+                            ) : reservation.reservationStatusName === "waiting_for_grooming" ? (
+                                <p>D-{reservation.reservationDate}</p>
+                            ) : reservation.reservationStatusName === "canceled" ? (
                                 <FaRegCircleXmark />
+                            ) : reservation.reservationStatusName === "completed" ? (
+                                <FaRegCircleCheck />
+                            ) : (
+                                <></>
                             )}
                         </div>
                         <div className="reservation-info-wrap">
                             <p>예약일시</p>
-                            <p>{reservation.date.toLocaleDateString()}</p>
+                            <p>{formatDate(reservation.reservationDate)}</p>
                         </div>
                         <div className="reservation-info-wrap">
                             <p>예약메뉴</p>
-                            <p>{reservation.menu}</p>
+                            <p>
+                                {reservation.categoryName} ({reservation.groomingName})
+                            </p>
                         </div>
                         <div className="reservation-info-wrap">
                             <p>시술담당</p>

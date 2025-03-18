@@ -35,16 +35,19 @@
   margin: 0;
   line-height: 30px;
 }
-.count-filter-wrap select {
+.count-filter-wrap .dropdown {
   margin: 0;
-  width: 120px;
-  height: 30px;
+}
+.count-filter-wrap .dropdown .dropdown-toggle {
+  color: #777 !important;
+  font-weight: 100;
+  background-color: #fff !important;
   border: 1px solid #e3e3e3;
   border-radius: 5px;
-  color: #777;
-  font-size: 13px;
-  font-weight: 100;
-  padding-left: 5px;
+  width: 130px;
+}
+.count-filter-wrap .dropdown .dropdown-toggle::after {
+  margin-left: 40px;
 }
 
 /* 예약내역 */
