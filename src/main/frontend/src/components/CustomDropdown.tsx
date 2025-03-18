@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 
 interface CustomDropdownProps {
@@ -18,18 +18,20 @@ const CustomDropdown = ({ options, defaultLabel, onChange }: CustomDropdownProps
 
             <Dropdown.Menu>
                 {options.map((option) => (
-                    <Dropdown.Item key={option.value} onClick={() => {
-                        setSelectedLabel(option.label);
-                        onChange?.(option.value);
-                    }}
+                    <Dropdown.Item
+                        key={option.value}
+                        onClick={() => {
+                            setSelectedLabel(option.label);
+                            onChange?.(option.value);
+                        }}
                     >
                         {option.label}
                     </Dropdown.Item>
                 ))}
             </Dropdown.Menu>
         </Dropdown>
-    )
-}
+    );
+};
 
 // 시/도 선택
 export const CitySelect: React.FC<{ onChange?: (value: string) => void }> = ({ onChange }) => (
@@ -53,7 +55,7 @@ export const CitySelect: React.FC<{ onChange?: (value: string) => void }> = ({ o
             { value: "전라남도", label: "전라남도" },
             { value: "경상북도", label: "경상북도" },
             { value: "경상남도", label: "경상남도" },
-            { value: "제주특별자치도", label: "제주특별자치도" }
+            { value: "제주특별자치도", label: "제주특별자치도" },
         ]}
         onChange={onChange}
     />
@@ -89,11 +91,11 @@ export const DistrictSelect: React.FC<{ onChange?: (value: string) => void }> = 
             { value: "은평구", label: "은평구" },
             { value: "종로구", label: "종로구" },
             { value: "중구", label: "중구" },
-            { value: "중랑구", label: "중랑구" }
+            { value: "중랑구", label: "중랑구" },
         ]}
         onChange={onChange}
     />
-)
+);
 
 // 예약시간 선택
 export const TimeSelect: React.FC<{ onChange?: (value: string) => void }> = ({ onChange }) => (
@@ -111,11 +113,11 @@ export const TimeSelect: React.FC<{ onChange?: (value: string) => void }> = ({ o
             { value: "16:00", label: "오후 04:00" },
             { value: "17:00", label: "오후 05:00" },
             { value: "18:00", label: "오후 06:00" },
-            { value: "19:00", label: "오후 07:00" }
+            { value: "19:00", label: "오후 07:00" },
         ]}
         onChange={onChange}
     />
-)
+);
 
 // 정렬 선택
 export const FilterSelect: React.FC<{ onChange?: (value: string) => void }> = ({ onChange }) => (
@@ -124,11 +126,23 @@ export const FilterSelect: React.FC<{ onChange?: (value: string) => void }> = ({
         options={[
             { value: "기본정렬순", label: "기본정렬순" },
             { value: "리뷰높은순", label: "리뷰높은순" },
-            { value: "리뷰많은순", label: "리뷰많은순" }
+            { value: "리뷰많은순", label: "리뷰많은순" },
         ]}
         onChange={onChange}
     />
-)
+);
 
+// 예약내역 정렬 선택
+export const FilterReservationSelect: React.FC<{ onChange?: (value: string) => void }> = ({ onChange }) => (
+    <CustomDropdown
+        defaultLabel="기본정렬순"
+        options={[
+            { value: "기본정렬순", label: "기본정렬순" },
+            { value: "최신예약순", label: "최신예약순" },
+            { value: "오래된예약순", label: "오래된예약순" },
+        ]}
+        onChange={onChange}
+    />
+);
 
 export default CustomDropdown;

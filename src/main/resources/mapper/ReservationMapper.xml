@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.dangle.reservation.ReservationMapper">
+
+    <resultMap id="reservationResultMap" type="com.project.dangle.command.ReservationVO">
+        <result property="reservationNo" column="RESERVATION_NO"/>
+        <result property="storeName" column="STORE_NAME"/>
+        <result property="reservationStatusName" column="RESERVATION_STATUS_NAME"/>
+        <result property="reservationDate" column="RESERVATION_DATE"/>
+        <result property="reservationTime" column="RESERVATION_TIME"/>
+        <result property="categoryName" column="CATEGORY_NAME"/>
+        <result property="groomingName" column="GROOMING_NAME"/>
+        <result property="designerRole" column="DESIGNER_ROLE"/>
+        <result property="designerName" column="DESIGNER_NAME"/>
+        <result property="userName" column="USER_NAME"/>
+        <result property="userPhone" column="USER_PHONE"/>
+        <result property="petName" column="PET_NAME"/>
+        <result property="reservationRequest" column="RESERVATION_REQUEST"/>
+        <result property="groomingPrice" column="GROOMING_PRICE"/>
+        <result property="paymentAmount" column="PAYMENT_AMOUNT"/>
+        <result property="paymentMethod" column="PAYMENT_METHOD"/>
+    </resultMap>
+    <select id="getReservationList" resultMap="reservationResultMap">
+        SELECT
+            R.RESERVATION_NO,
+            S.STORE_NAME,
+            RS.RESERVATION_STATUS_NAME,
+            R.RESERVATION_DATE,
+            R.RESERVATION_TIME,
+            GM.CATEGORY_NAME,
+            GM.GROOMING_NAME,
+            D.DESIGNER_ROLE,
+            D.DESIGNER_NAME,
+            U.USER_NAME,
+            U.USER_PHONE,
+            P.PET_NAME,
+            R.RESERVATION_REQUEST,
+            GM.GROOMING_PRICE,
+            PAY.PAYMENT_AMOUNT,
+            PAY.PAYMENT_METHOD
+        FROM RESERVATION AS R
+                 LEFT JOIN RESERVATION_STATUS AS RS
+                           ON R.RESERVATION_STATUS_NO = RS.RESERVATION_STATUS_NO
+                 LEFT JOIN STORE AS S
+                           ON R.STORE_NO = S.STORE_NO
+                 LEFT JOIN (
+            SELECT
+                GM.STORE_NO,
+                GM.GROOMING_NAME,
+                GM.GROOMING_PRICE,
+                GC.CATEGORY_NAME
+            FROM GROOMING_MENU AS GM
+                     LEFT JOIN GROOMING_CATEGORY AS GC
+                               ON GM.CATEGORY_NO = GC.CATEGORY_NO
+                LIMIT 1
+        ) AS GM
+                           ON S.STORE_NO = GM.STORE_NO
+                 LEFT JOIN DESIGNER AS D
+                           ON R.DESIGNER_NO = D.DESIGNER_NO
+                 LEFT JOIN USERS AS U
+                           ON R.USER_NO = U.USER_NO
+                 LEFT JOIN PET AS P
+                           ON R.USER_NO = P.USER_NO
+                 LEFT JOIN PAYMENT AS PAY
+                           ON R.RESERVATION_NO = PAY.RESERVATION_NO
+        WHERE U.USER_ID = #{userId}
+        GROUP BY R.RESERVATION_NO, S.STORE_NAME, RS.RESERVATION_STATUS_NAME, R.RESERVATION_DATE,
+                 R.RESERVATION_TIME, GM.CATEGORY_NAME, GM.GROOMING_NAME, D.DESIGNER_ROLE,
+                 D.DESIGNER_NAME, U.USER_NAME, U.USER_PHONE, P.PET_NAME,
+                 R.RESERVATION_REQUEST, GM.GROOMING_PRICE, PAY.PAYMENT_AMOUNT, PAY.PAYMENT_METHOD;
+    </select>
+</mapper>
