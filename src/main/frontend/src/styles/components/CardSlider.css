@@ -22,10 +22,12 @@
 .card-store-time-text {
     margin: 0;
     width: 250px;
+    color: #777;
 }
 .card-title {
     margin: 0;
     font-size: 18px;
+    color: #000;
 }
 
 /* 리뷰 평점 + 리뷰 개수 */
@@ -68,7 +70,8 @@
 .card-store-map > svg {
     width: 18px;
     height: 18px;
-    margin-left: -3px;
+    margin: 1px 0px 0px -3px;
+    color: #777;
 }
 
 .card-store-time > svg {
@@ -76,6 +79,7 @@
     margin-left: -2px;
     width: 16px;
     height: 18px;
+    color: #777;
 }
 
 /* indicators */

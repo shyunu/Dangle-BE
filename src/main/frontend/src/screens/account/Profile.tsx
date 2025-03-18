@@ -6,6 +6,7 @@ import { FaRegFaceSmile } from "react-icons/fa6";
 import { PiUserCircleLight } from "react-icons/pi";
 import Accordion from "react-bootstrap/Accordion";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 interface ProfileLogProps {
     isLogin: boolean;
@@ -14,8 +15,7 @@ interface ProfileLogProps {
 
 const Profile: React.FC<ProfileLogProps> = () => {
     const navigation = useNavigate();
-    const [userId, setUserId] = useState<string | null>(null);
-
+    const [userId, setUserId] = useState<string>("");
     useEffect(() => {
         setUserId(sessionStorage.getItem("userId"));
     }, []);
@@ -25,6 +25,24 @@ const Profile: React.FC<ProfileLogProps> = () => {
         setUserId(null);
         navigation("/profile");
     };
+
+    const [userName, setUserName] = useState<string | null>("");
+    useEffect(() => {
+        if (userId) {
+            axios
+                .get("/account/profile", { params: { userId }})
+                .then((response) => {
+                    if (response.data) {
+                        setUserName(response.data);
+                    } else {
+                        console.error("예상치 못한 응답 구조입니다.");
+                    }
+                })
+                .catch((error) => {
+                    console.error("프로필 정보 조회 에러: ", error);
+                });
+        }
+    }, [userId]);
 
     return (
         <div className="profile-mypage-container">
@@ -36,7 +54,7 @@ const Profile: React.FC<ProfileLogProps> = () => {
                         <img src="./image/profile1.jpg" alt="profile-img" />
                         <div className="profile-name">
                             <div className="profile-name-bold">
-                                <p>강해린</p>
+                                <p>{userName}</p>
                                 <p>님</p>
                             </div>
                             <div className="profile-intro-comment">
@@ -45,7 +63,7 @@ const Profile: React.FC<ProfileLogProps> = () => {
                             </div>
                         </div>
                         <div className="profile-log-btn">
-                            <Button text="로그아웃" className="pink-button-s" onClick={handleLogout} />
+                            <Button text="로그아웃" className="white-button-s" onClick={handleLogout} />
                         </div>
                     </>
                 ) : (
@@ -61,7 +79,7 @@ const Profile: React.FC<ProfileLogProps> = () => {
                             </div>
                         </div>
                         <div className="profile-log-btn">
-                            <Button text="로그인" className="green-button-s" onClick={() => navigation("/login")} />
+                            <Button text="로그인" className="white-button-s" onClick={() => navigation("/login")} />
                         </div>
                     </>
                 )}

@@ -4,6 +4,8 @@ import com.project.dangle.command.AccountVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AccountServiceImpl implements AccountService {
 
@@ -51,5 +53,12 @@ public class AccountServiceImpl implements AccountService {
             return true;
         }
         return false;
+    }
+
+    // 로그인한 계정정보 조회
+    @Override
+    public List<String> getProfile(String userId) {
+        List<String> list = accountMapper.getProfile(userId);
+        return list;
     }
 }

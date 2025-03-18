@@ -38,7 +38,7 @@ const Slider: React.FC<SliderProps> = ({ storeData }) => {
                                         <p>리뷰 {formatWithCommas(store.reviewCount)}개</p>
                                         <IoIosArrowForward />
                                     </div>
-                                    <img className="card-img w-100" src={store.imageUrl} alt={`Store Image ${store.storeNo}`} />
+                                    {/*<img className="card-img w-100" src={store.imageUrl} alt={`Store Image ${store.storeNo}`} />*/}
                                     <div className="card-store-map">
                                         <LuMapPin />
                                         <p className="card-store-location">{store.storeAddress} {store.storeAddressDetail}</p>
