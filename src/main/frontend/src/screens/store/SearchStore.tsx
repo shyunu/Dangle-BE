@@ -35,19 +35,39 @@ const SearchStore: React.FC = () => {
             });
     }, []);
 
+    // 필터링 조건기준
+    const [searchTerm, setSearchTerm] = useState<string>(""); // 검색 매장명
+    const [selectedCity, setSelectedCity] = useState<string>(""); // 시/도
+    const [selectedDistrict, setSelectedDistrict] = useState<string>(""); // 구/군
+
+    // 검색버튼
+    const handleReset = () => {
+        setSearchTerm("");
+        setSelectedCity("");
+        setSelectedDistrict("");
+    }
+
+    // 검색 필터링
+    const filteredStores = storeData.filter((store) => {
+        const matchSearchTerm = store.storeName.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchCity = selectedCity ? store.storeAddress.includes(selectedCity) : true;
+        const matchDistrict = selectedDistrict ? store.storeAddress.includes(selectedDistrict) : true;
+        return matchSearchTerm && matchCity && matchDistrict;
+    });
+
     return (
         <div className="search-store-container">
             {/* 선택 및 검색란 */}
             <div className="search-detail-container">
                 <p>매장 검색</p>
                 <div className="search-store-option-wrap">
-                    <CitySelect />
-                    <DistrictSelect />
+                    <CitySelect value={selectedCity} onChange={setSelectedCity} />
+                    <DistrictSelect value={selectedDistrict} onChange={setSelectedDistrict} />
                     <TimeSelect />
                 </div>
                 <div className="search-store-input-wrap">
-                    <input placeholder="매장명을 입력해주세요." />
-                    <Button text="검색" className="white-button-s search-store-btn" />
+                    <input type="text" placeholder="매장명을 입력해주세요." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+                    <Button text="전체조회" className="white-button-s search-store-btn" onClick={handleReset} />
                 </div>
             </div>
 
@@ -61,29 +81,33 @@ const SearchStore: React.FC = () => {
 
             {/* 상점박스 */}
             <div className="store-box-container">
-                {storeData.map((store) => (
-                    <div key={store.storeNo} className="store-box-wrap" onClick={() => handleStoreClick(store)}>
-                        <p className="store-name">{store.storeName}</p>
-                        <div className="store-review-icon">
-                            <img src="./image/star.jpg" />
-                            <p>{formatReviewScore(store.reviewScoreAvg)}</p>
-                            <p>리뷰 {formatWithCommas(store.reviewCount)}개</p>
+                {filteredStores.length > 0 ? (
+                    filteredStores.map((store) => (
+                        <div key={store.storeNo} className="store-box-wrap" onClick={() => handleStoreClick(store)}>
+                            <p className="store-name">{store.storeName}</p>
+                            <div className="store-review-icon">
+                                <img src="./image/star.jpg" />
+                                <p>{formatReviewScore(store.reviewScoreAvg)}</p>
+                                <p>리뷰 {formatWithCommas(store.reviewCount)}개</p>
+                            </div>
+                            <div className="store-images">
+                                {/*{store.imageUrl.map((url, index) => (*/}
+                                {/*    <img key={index} src={url} alt={`${store.storeName} 이미지`} />*/}
+                                {/*))}*/}
+                            </div>
+                            <div className="store-info-icon">
+                                <LuMapPin />
+                                <p>{store.storeAddress} {store.storeAddressDetail}</p>
+                            </div>
+                            <div className="store-info-icon">
+                                <LuClock4 />
+                                <p>영업시간 : {formatHourMinute(store.storeOpenTime)}~{formatHourMinute(store.storeCloseTime)} ({store.storeDayoff} 휴무)</p>
+                            </div>
                         </div>
-                        <div className="store-images">
-                            {/*{store.imageUrl.map((url, index) => (*/}
-                            {/*    <img key={index} src={url} alt={`${store.storeName} 이미지`} />*/}
-                            {/*))}*/}
-                        </div>
-                        <div className="store-info-icon">
-                            <LuMapPin />
-                            <p>{store.storeAddress} {store.storeAddressDetail}</p>
-                        </div>
-                        <div className="store-info-icon">
-                            <LuClock4 />
-                            <p>영업시간 : {formatHourMinute(store.storeOpenTime)}~{formatHourMinute(store.storeCloseTime)} ({store.storeDayoff} 휴무)</p>
-                        </div>
-                    </div>
-                ))}
+                    ))
+                ) : (
+                    <p>해당하는 매장이 없습니다.</p>
+                )}
             </div>
         </div>
     );

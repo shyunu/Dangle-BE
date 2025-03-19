@@ -16,6 +16,7 @@
 .card:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transform: translateY(-3px);
+    cursor: pointer;
 }
 .card-title,
 .card-store-location,
@@ -64,7 +65,6 @@
 .card-store-time {
     display: flex;
     padding-top: 5px;
-    margin-left: 5px;
 }
 
 .card-store-map > svg {
