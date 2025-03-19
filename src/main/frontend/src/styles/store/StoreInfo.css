@@ -211,12 +211,12 @@
 }
 .review-id {
   font-size: 14px;
-  margin-top: 3px;
+  margin: 3px 0px 0px 0px;
 }
 .review-designer-grooming {
   font-size: 11px;
   color: #777;
-  margin-bottom: 10px;
+  margin: 2px 0px;
 }
 .review-content {
   font-size: 12px;

@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 
 interface CustomDropdownProps {
     options: { value: string; label: string }[];
     defaultLabel: string;
+    value?: string;
     onChange?: (value: string) => void;
 }
 
-const CustomDropdown = ({ options, defaultLabel, onChange }: CustomDropdownProps) => {
+const CustomDropdown = ({ options, defaultLabel, value, onChange }: CustomDropdownProps) => {
     const [selectedLabel, setSelectedLabel] = useState(defaultLabel);
+
+    useEffect(() => {
+        const selectedOption = options.find((option) => option.value === value);
+        if (selectedOption) {
+            setSelectedLabel(selectedOption.label);
+        }
+    }, [value, options]);
 
     return (
         <Dropdown>
@@ -34,9 +42,10 @@ const CustomDropdown = ({ options, defaultLabel, onChange }: CustomDropdownProps
 };
 
 // 시/도 선택
-export const CitySelect: React.FC<{ onChange?: (value: string) => void }> = ({ onChange }) => (
+export const CitySelect: React.FC<{ value?: string; onChange?: (value: string) => void }> = ({ value, onChange }) => (
     <CustomDropdown
         defaultLabel="시/도 선택"
+        value={value}
         options={[
             { value: "시/도 선택", label: "시/도 선택" },
             { value: "서울특별시", label: "서울특별시" },
@@ -62,9 +71,10 @@ export const CitySelect: React.FC<{ onChange?: (value: string) => void }> = ({ o
 );
 
 // 구/군 선택
-export const DistrictSelect: React.FC<{ onChange?: (value: string) => void }> = ({ onChange }) => (
+export const DistrictSelect: React.FC<{ value?: string; onChange?: (value: string) => void }> = ({ value, onChange }) => (
     <CustomDropdown
         defaultLabel="구/군 선택"
+        value={value}
         options={[
             { value: "구/군 선택", label: "구/군 선택" },
             { value: "강남구", label: "강남구" },

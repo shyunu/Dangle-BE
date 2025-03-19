@@ -8,6 +8,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import {Store} from "../types/store";
 import {formatHourMinute} from "../utils/formatHourMinute";
 import {formatReviewScore} from "../utils/formatReviewScore";
+import {useNavigate} from "react-router-dom";
 
 interface SliderProps {
     storeData: Store[];
@@ -15,11 +16,16 @@ interface SliderProps {
 
 const Slider: React.FC<SliderProps> = ({ storeData }) => {
     const imageList = storeData || [];
+    const navigation = useNavigate();
 
     // 두 개의 이미지를 하나의 그룹으로 묶기
     const groupedImages = [];
     for (let i = 0; i < imageList.length; i += 2) {
         groupedImages.push(imageList.slice(i, i + 2)); // 두 개씩 묶어서 그룹화
+    }
+
+    const handleStoreInfo = (store: Store) => {
+        navigation("/storeInfo", { state: { store }})
     }
 
     return (
@@ -30,7 +36,7 @@ const Slider: React.FC<SliderProps> = ({ storeData }) => {
                     <Carousel.Item key={index}>
                         <div className="card-slider-item">
                             {group.map((store) => (
-                                <div className="card" key={store.storeNo}>
+                                <div className="card" key={store.storeNo} onClick={() => handleStoreInfo(store)}>
                                     <p className="card-title">{store.storeName}</p>
                                     <div className="card-star-review">
                                         <FaStar />
