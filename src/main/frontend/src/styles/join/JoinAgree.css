@@ -69,10 +69,9 @@
   margin-bottom: 10px;
 }
 .join-agree-all > .icon-agree-all {
-  margin: 0;
   width: 17px;
   height: 17px;
-  margin-right: 2px;
+  margin: 0px 0px 0px -1.5px;
 }
 .join-agree-all > p {
   margin: 0;

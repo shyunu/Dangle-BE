@@ -12,6 +12,7 @@ import axios from "axios";
 const ReservationList: React.FC = () => {
     const navigation = useNavigate();
     const userId = sessionStorage.getItem("userId");
+    const [selectedSort, setSelectedSort] = useState<string>("기본정렬순"); // 예약내역 정렬기준
 
     // 예약내역 list
     const [reservationList, setReservationList] = useState<Reservation[]>([]);
@@ -35,17 +36,43 @@ const ReservationList: React.FC = () => {
         navigation("/reservationDetail", { state: { reservation } });
     };
 
+    const sortedReservations = [...reservationList]
+        .filter((reservationList) => {
+            switch (selectedSort) {
+                case "예약대기" :
+                    return reservationList.reservationStatusName === "waiting_for_reservation";
+                case "시술대기" :
+                    return reservationList.reservationStatusName === "waiting_for_grooming";
+                case "예약취소" :
+                    return reservationList.reservationStatusName === "canceled";
+                case "시술완료" :
+                    return reservationList.reservationStatusName === "completed";
+                default:
+                    return true;
+            }
+        })
+        .sort((a,b) => {
+            switch (selectedSort) {
+                case "최신예약순":
+                    return new Date(b.reservationDate).getTime() - new Date(a.reservationDate).getTime();
+                case "오래된예약순" :
+                    return new Date(a.reservationDate).getTime() - new Date(b.reservationDate).getTime();
+                default:
+                    return 0;
+            }
+        });
+
     return (
         <div className="reservation-list-container">
             <p className="reservation-list-title">나의 예약 내역</p>
             <div className="store-info-border"></div>
             <div className="count-filter-wrap">
                 <p>총 {reservationList.length}건</p>
-                <FilterReservationSelect />
+                <FilterReservationSelect value={selectedSort} onChange={setSelectedSort} />
             </div>
 
             <div className="reservation-list-wrap">
-                {reservationList.map((reservation) => (
+                {sortedReservations.map((reservation) => (
                     <div key={reservation.reservationNo} className="reservation-box">
                         <div className="reservation-list-name-status">
                             <p>{reservation.storeName}</p>

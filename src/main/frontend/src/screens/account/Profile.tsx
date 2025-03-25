@@ -8,12 +8,7 @@ import Accordion from "react-bootstrap/Accordion";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-interface ProfileLogProps {
-    isLogin: boolean;
-    setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const Profile: React.FC<ProfileLogProps> = () => {
+const Profile: React.FC = () => {
     const navigation = useNavigate();
     const [userId, setUserId] = useState<string>("");
     useEffect(() => {

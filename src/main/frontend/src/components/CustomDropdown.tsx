@@ -8,15 +8,21 @@ interface CustomDropdownProps {
     onChange?: (value: string) => void;
 }
 
+
 const CustomDropdown = ({ options, defaultLabel, value, onChange }: CustomDropdownProps) => {
     const [selectedLabel, setSelectedLabel] = useState(defaultLabel);
 
+    // value 값이 변경될 때 selectedLabel 업데이트
     useEffect(() => {
-        const selectedOption = options.find((option) => option.value === value);
-        if (selectedOption) {
-            setSelectedLabel(selectedOption.label);
+        if (value) {
+            const selectedOption = options.find((option) => option.value === value);
+            if (selectedOption) {
+                setSelectedLabel(selectedOption.label);
+            }
+        } else {
+            setSelectedLabel(defaultLabel);
         }
-    }, [value, options]);
+    }, [value, options, defaultLabel]);
 
     return (
         <Dropdown>
@@ -136,20 +142,26 @@ export const FilterSelect: React.FC<{ onChange?: (value: string) => void }> = ({
         options={[
             { value: "기본정렬순", label: "기본정렬순" },
             { value: "리뷰높은순", label: "리뷰높은순" },
+            { value: "리뷰낮은순", label: "리뷰낮은순" },
             { value: "리뷰많은순", label: "리뷰많은순" },
+            { value: "리뷰적은순", label: "리뷰적은순" },
         ]}
         onChange={onChange}
     />
 );
 
 // 예약내역 정렬 선택
-export const FilterReservationSelect: React.FC<{ onChange?: (value: string) => void }> = ({ onChange }) => (
+export const FilterReservationSelect: React.FC<{ value?: string; onChange?: (value: string) => void }> = ({ value, onChange }) => (
     <CustomDropdown
         defaultLabel="기본정렬순"
         options={[
             { value: "기본정렬순", label: "기본정렬순" },
             { value: "최신예약순", label: "최신예약순" },
             { value: "오래된예약순", label: "오래된예약순" },
+            { value: "예약대기", label: "예약대기" },
+            { value: "시술대기", label: "시술대기" },
+            { value: "예약취소", label: "예약취소" },
+            { value: "시술완료", label: "시술완료" },
         ]}
         onChange={onChange}
     />
