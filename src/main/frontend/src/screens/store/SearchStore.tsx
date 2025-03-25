@@ -39,12 +39,14 @@ const SearchStore: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState<string>(""); // 검색 매장명
     const [selectedCity, setSelectedCity] = useState<string>(""); // 시/도
     const [selectedDistrict, setSelectedDistrict] = useState<string>(""); // 구/군
+    const [selectedSort, setSelectedSort] = useState<string>("기본정렬순"); // 정렬기준
 
-    // 검색버튼
+    // 전체조회버튼 (초기화)
     const handleReset = () => {
         setSearchTerm("");
-        setSelectedCity("");
-        setSelectedDistrict("");
+        setSelectedCity(null);
+        setSelectedDistrict(null);
+        setSelectedSort("기본정렬순");
     }
 
     // 검색 필터링
@@ -54,6 +56,21 @@ const SearchStore: React.FC = () => {
         const matchDistrict = selectedDistrict ? store.storeAddress.includes(selectedDistrict) : true;
         return matchSearchTerm && matchCity && matchDistrict;
     });
+
+    // 정렬 적용
+    const sortedStores = [...filteredStores].sort((a,b) => {
+        if (selectedSort === "리뷰높은순") {
+            return b.reviewScoreAvg - a.reviewScoreAvg;
+        } else if (selectedSort === "리뷰낮은순") {
+            return a.reviewScoreAvg - b.reviewScoreAvg;
+        } else if (selectedSort === "리뷰많은순") {
+            return b.reviewCount - a.reviewCount;
+        } else if (selectedSort === "리뷰적은순") {
+            return a.reviewCount - b.reviewCount;
+        } else {
+            return 0;
+        }
+    })
 
     return (
         <div className="search-store-container">
@@ -76,13 +93,13 @@ const SearchStore: React.FC = () => {
 
             {/* 필터 */}
             <div className="search-store-filter">
-                <FilterSelect />
+                <FilterSelect onChange={setSelectedSort} />
             </div>
 
             {/* 상점박스 */}
             <div className="store-box-container">
-                {filteredStores.length > 0 ? (
-                    filteredStores.map((store) => (
+                {sortedStores.length > 0 ? (
+                    sortedStores.map((store) => (
                         <div key={store.storeNo} className="store-box-wrap" onClick={() => handleStoreClick(store)}>
                             <p className="store-name">{store.storeName}</p>
                             <div className="store-review-icon">

@@ -10,6 +10,9 @@
   height: 20px;
   margin: 5px 0px 2px 5px;
 }
+.join-form-container input {
+  padding-left: 10px;
+}
 .join-form-container input:focus {
   outline: none;
   border-color: #edafb8;
@@ -102,6 +105,9 @@
 .join-form-gender .gender-wrap input {
   width: 20px;
   height: 20px;
+}
+.join-form-gender .gender-wrap input:focus {
+  box-shadow: none;
 }
 .join-form-gender .gender-wrap input:checked {
   accent-color: black;

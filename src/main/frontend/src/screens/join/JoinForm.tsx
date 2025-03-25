@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { MdAlternateEmail } from "react-icons/md";
 import axios from "axios";
+import {formatPhoneNumber} from "../../utils/formatPhoneNumber";
 
 interface AccountVO {
     userId?: string | number;
@@ -189,7 +190,7 @@ const JoinForm: React.FC = () => {
                 </div>
                 <p>연락처</p>
                 <div className="join-form-input-wrap">
-                    <input type="text" name="userPhone" value={accountVO.userPhone} onChange={handleInputChange} />
+                    <input type="text" name="userPhone" value={formatPhoneNumber(accountVO.userPhone)} onChange={handleInputChange} />
                 </div>
                 <p>이메일</p>
                 <div className="join-form-input-wrap email-wrap">
