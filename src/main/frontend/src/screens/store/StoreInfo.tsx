@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import "../../styles/store/StoreInfo.css";
 import Slider from "../../components/Slider";
 import { IoIosArrowBack } from "react-icons/io";
-import { FaRegHeart } from "react-icons/fa6";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { FaRegCheckCircle, FaRegCircle } from "react-icons/fa";
 import Button from "../../components/Button";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -34,6 +34,8 @@ const StoreInfo: React.FC = () => {
     const [selectedTab, setSelectedTab] = useState<string>("홈");
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [selectedDesigner, setSelectedDesigner] = useState<number | null>(null);
+    const [isSavedStore, setIsSavedStore] = useState<boolean>(false); // 저장된 매장인지 여부(찜)
+    const userId = sessionStorage.getItem("userId"); // 로그인된 사용자아이디
 
     const handleCategoryClick = (category: string) => {
         setSelectedCategory(category);
@@ -127,12 +129,27 @@ const StoreInfo: React.FC = () => {
             });
     }, []);
 
+    // 예약하기 버튼
+    const handleReservation = () => {
+        if(userId) {
+            navigation("/reservationForm");
+        } else {
+            navigation("/login", {state: { from: "/reservationForm" } });
+        }
+
+    }
+
     return (
         <div className="store-info-container">
             <div className="store-title-wrap">
                 <IoIosArrowBack onClick={() => navigation(-1)} />
                 <p>{store.storeName}</p>
-                <FaRegHeart />
+                {isSavedStore ? (
+                    <FaHeart onClick={() => setIsSavedStore(false)} style={{color: "#E78A99"}} />
+                ) : (
+                    <FaRegHeart onClick={() => setIsSavedStore(true)} />
+                )}
+
             </div>
 
             {/* image */}
@@ -267,7 +284,7 @@ const StoreInfo: React.FC = () => {
 
             {/* reservation button */}
             <div className="reservation-btn">
-                <Button text="예약하기" onClick={() => navigation("/reservationForm")} />
+                <Button text="예약하기" onClick={handleReservation} />
             </div>
         </div>
     );

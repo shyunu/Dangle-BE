@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import "../../styles/account/Login.css";
 import { FcGoogle } from "react-icons/fc";
 import { SiKakao, SiNaver } from "react-icons/si";
-import { Link, useNavigate } from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
 
 const Login: React.FC = () => {
     const navigation = useNavigate();
+    const location = useLocation();
     const [userId, setUserId] = useState<string>("");
     const [userPw, setUserPw] = useState<string>("");
 
@@ -21,7 +22,8 @@ const Login: React.FC = () => {
 
                 if (response.data === "로그인 성공") {
                     sessionStorage.setItem("userId", userId);
-                    navigation("/home");
+                    const redirectTo = location.state?.from || "/home";
+                    navigation(redirectTo);
                 } else {
                     alert("아이디 또는 비밀번호가 일치하지 않습니다.");
                 }

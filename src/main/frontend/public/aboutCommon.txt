@@ -49,7 +49,8 @@
 
 * 뒤로가기 : import { IoIosArrowBack } from "react-icons/io";
 * 앞으로가기(or 들어가기) : import { IoIosArrowForward } from "react-icons/io";
-* 저장(하트) : import { FaRegHeart } from "react-icons/fa6";
+* 저장(하트 비활성화) : import { FaRegHeart } from "react-icons/fa";
+* 저장(하트 활성화) : import { FaHeart } from "react-icons/fa";
 * 원형체크O : import { FaRegCheckCircle, FaRegCircle } from "react-icons/fa";
 * 원형체크X : import { FaRegCircle } from "react-icons/fa";
 * 별(full) : import { FaStar, FaStarHalf, FaRegStar } from "react-icons/fa";
