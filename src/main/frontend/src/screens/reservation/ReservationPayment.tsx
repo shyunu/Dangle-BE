@@ -2,11 +2,13 @@ import React from "react";
 import "../../styles/reservation/ReservationPayment.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { FaRegHeart } from "react-icons/fa6";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 
 const ReservationPayment: React.FC = () => {
   const navigation = useNavigate();
+  const location = useLocation();
+  const reservationData = location.state; // 넘겨온 예약 정보(날짜,시간,디자이너,메뉴)
 
   return (
     <div className="reservation-payment-container">
@@ -18,12 +20,20 @@ const ReservationPayment: React.FC = () => {
       <div className="reservation-payment-wrap">
         <p className="rv-page-title">예약정보</p>
         <div>
-          <p>예약일정</p>
-          <input type="text" placeholder="2025.04.03(목) 13:00" disabled />
+          <p>예약날짜 / 시간</p>
+          <input
+            type="text"
+            value={`${reservationData.reservationDate} / ${reservationData.reservationTime}`}
+            disabled
+          />
         </div>
         <div>
-          <p>예약디자이너/메뉴</p>
-          <input type="text" placeholder="강해린 디자이너 / 기본얼굴컷" disabled />
+          <p>예약디자이너 / 메뉴</p>
+          <input
+            type="text"
+            value={`${reservationData.designer} / ${reservationData.groomingCategory} (${reservationData.groomingMenu})`}
+            disabled
+          />
         </div>
 
         <div className="rv-border-line"></div>

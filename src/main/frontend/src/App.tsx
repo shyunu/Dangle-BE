@@ -19,6 +19,7 @@ import ReservationList from "./screens/reservation/ReservationList";
 import ReservationDetail from "./screens/reservation/ReservationDetail";
 import ReservationForm from "./screens/reservation/ReservationForm";
 import Profile from "./screens/account/Profile";
+import ReservationPayment from "./screens/reservation/ReservationPayment";
 
 const App: React.FC = () => {
     const navigation = useNavigate();

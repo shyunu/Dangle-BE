@@ -7,6 +7,7 @@ import Button from "../../components/Button";
 
 const ReservationForm: React.FC = () => {
   const navigation = useNavigate();
+  const [selectedDate, setSelectedDate] = useState<string>(""); // 예약날짜 선택
   const [selectedDesigner, setSelectedDesigner] = useState<string>(""); // 예약디자이너 선택
   const [selectedTime, setSelectedTime] = useState<string>(""); // 예약시간 선택
   const [selectedCategory, setSelectedCategory] = useState<string>(""); // 메뉴카테고리 선택
@@ -29,6 +30,24 @@ const ReservationForm: React.FC = () => {
   const categoryList = ["목욕", "위생+목욕", "전체클리핑", "스포팅", "가위컷", "얼굴컷 추가"];
   const menuList = ["기본얼굴컷", "스타일컷", "특수컷"];
 
+  // 예약 다음단계 버튼
+  const handleNextStep = () => {
+    if (!selectedDate) return alert("날짜를 선택해주세요.");
+    if (!selectedDesigner) return alert("디자이너를 선택해주세요.");
+    if (!selectedTime) return alert("시간을 선택해주세요.");
+    if (!selectedCategory || !selectedMenu) return alert("메뉴를 선택해주세요.");
+
+    const reservationData = {
+      reservationDate: selectedDate,
+      designer: selectedDesigner,
+      reservationTime: selectedTime,
+      groomingCategory: selectedCategory,
+      groomingMenu: selectedMenu,
+    };
+
+    navigation("/reservationPayment", { state: reservationData });
+  };
+
   return (
     <div className="reservation-form-container">
       <div className="store-title-wrap">
@@ -40,7 +59,12 @@ const ReservationForm: React.FC = () => {
         <p className="rv-page-title">예약하기</p>
         <div className="rv-date-wrap">
           <p>날짜 선택</p>
-          <input type="date" placeholder="날짜를 선택해주세요." />
+          <input
+            type="date"
+            placeholder="날짜를 선택해주세요."
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+          />
         </div>
         <div className="rv-designer-time-wrap">
           <div className="rv-designer-wrap">
@@ -109,7 +133,7 @@ const ReservationForm: React.FC = () => {
         </div>
       </div>
       <div className="rv-form-button-wrap">
-        <Button text="다음" onClick={() => navigation("/reservationPayment")} />
+        <Button text="다음" onClick={handleNextStep} />
       </div>
     </div>
   );
