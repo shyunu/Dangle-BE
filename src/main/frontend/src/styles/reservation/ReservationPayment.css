@@ -1,0 +1,69 @@
+.reservation-payment-container {
+    width: 100%;
+    margin: 80px 0px 140px 0px;
+    padding: 30px;
+    overflow-y: auto; /* 내부 스크롤 활성화 */
+}
+.reservation-payment-wrap {
+    margin-top: 30px;
+}
+.reservation-payment-wrap > div > p {
+    margin: 15px 0px 5px 0px;
+}
+.reservation-payment-wrap input {
+    width: 100%;
+    border: 1px solid #e3e3e3;
+    border-radius: 5px;
+    height: 40px;
+    color: #777;
+    padding: 0px 5px 0px 10px;
+    outline: none;
+}
+
+/* border */
+.rv-border-line {
+    border: 1px solid #e3e3e3;
+    height: 1px;
+    margin: 20px 0px;
+}
+
+/* 예약금 결제 */
+.rv-pay-wrap p {
+    margin: 15px 0px 5px 0px;
+}
+.rv-pay-wrap .rv-pay-info > p:nth-of-type(1) {
+    color: #000;
+}
+.rv-pay-wrap .rv-pay-info > p {
+    margin: 0;
+    color: #777;
+    margin: 3px 0px;
+}
+/* 결제방식 */
+.rv-pay-method {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.rv-pay-method2 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 5px;
+}
+.pay-btn {
+    width: 33%;
+    height: 40px;
+    color: #777;
+}
+.rv-pay-price {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.rv-pay-price > p:nth-of-type(2) {
+    color: #000;
+    font-weight: 300;
+}
