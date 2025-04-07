@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {Routes, Route, useNavigate} from "react-router-dom";
+import React, { useState } from "react";
+import {Routes, Route, useLocation} from "react-router-dom";
 import "./styles/App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SearchAccount from "./screens/account/SearchAccount";
@@ -20,9 +20,17 @@ import ReservationDetail from "./screens/reservation/ReservationDetail";
 import ReservationForm from "./screens/reservation/ReservationForm";
 import Profile from "./screens/account/Profile";
 import ReservationPayment from "./screens/reservation/ReservationPayment";
+import ConfirmEdit from "./screens/account/ConfirmEdit";
+import EditProfile from "./screens/account/EditProfile";
+import DeleteAccount from "./screens/account/deleteAccount";
 
 const App: React.FC = () => {
-    const navigation = useNavigate();
+    const location = useLocation();
+
+
+    // Footer를 숨길 경로 list
+    const hideFooterRoutes = ["/deleteAccount"];
+
 
     useEffect(() => {
         if (window.location.pathname === "/") {
@@ -51,9 +59,12 @@ const App: React.FC = () => {
                 <Route path="/joinAgree" element={<JoinAgree />} />
                 <Route path="/joinForm" element={<JoinForm />} />
                 <Route path="/joinComplete" element={<JoinComplete />} />
+                <Route path="/confirmEdit" element={<ConfirmEdit />} />
+                <Route path="/editProfile" element={<EditProfile />} />
+                <Route path="/deleteAccount" element={<DeleteAccount />} />
             </Routes>
 
-            <Footer />
+            {!hideFooterRoutes.includes(location.pathname) && <Footer />}
         </div>
     );
 };

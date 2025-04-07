@@ -1,0 +1,178 @@
+.edit-profile-container {
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    margin: 80px 0px 100px 0px;
+    padding: 30px;
+    overflow-y: auto; /* 내부 스크롤 활성화 */
+}
+
+.edit-profile-wrap {
+    display: flex;
+    flex-direction: column;
+    margin-top: 75px;
+    width: 65%;
+    height: 500px;
+}
+.edit-profile-wrap p {
+    font-size: 13px;
+    height: 20px;
+    margin: 5px 0px 2px 5px;
+}
+.edit-profile-wrap input {
+    padding: 0px 5px;
+}
+.edit-profile-wrap input:focus {
+    outline: none;
+    border-color: #edafb8;
+    box-shadow: 0 0 8px rgba(237, 175, 184, 0.5);
+}
+
+/* input + button */
+.edit-form-input-wrap {
+    display: flex;
+    gap: 5px;
+    justify-content: space-between;
+    width: 100%;
+}
+.edit-pw-confirm-txt,
+.edit-form-input-wrap.inactive {
+    display: none;
+}
+.edit-pw-confirm-txt.active,
+.edit-form-input-wrap.active {
+    display: block;
+}
+.edit-form-input-wrap > input {
+    width: 100%;
+    border: 1px solid #e3e3e3;
+    border-radius: 5px;
+    height: 30px;
+}
+
+.edit-form-pw-info {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    font-weight: 100;
+    color: #777;
+    margin-left: 3px;
+    height: 20px;
+}
+.edit-form-pw-info > svg {
+    width: 15px;
+    height: 15px;
+    margin-top: 2px;
+}
+.edit-form-pw-info > p {
+    margin-top: 10px;
+    font-size: 10px;
+}
+
+/* 생년월일 + 성별 */
+.edit-form-birth-gender-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+.edit-form-birth {
+    flex: 5;
+    display: flex;
+    flex-direction: column;
+}
+.edit-form-birth input {
+    width: 100%;
+    border: 1px solid #e3e3e3;
+    border-radius: 5px;
+    height: 30px;
+    padding-left: 5px;
+    color: #777;
+    font-weight: 200;
+    font-size: 12px;
+}
+.edit-form-birth svg {
+    width: 35px;
+    height: 35px;
+}
+.calendar-wrap {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.edit-form-gender {
+    display: flex;
+    flex-direction: column;
+    flex: 5;
+}
+.edit-form-gender > p {
+    margin-left: 15px;
+}
+.edit-form-gender .gender-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 5px;
+    align-items: center;
+    padding: 0px 15px;
+    width: 100%;
+}
+.edit-form-gender .gender-wrap input {
+    width: 20px;
+    height: 20px;
+}
+.edit-form-gender .gender-wrap input:checked {
+    accent-color: black;
+}
+.edit-form-gender .gender-wrap p {
+    line-height: 10px;
+    margin: 10px 15px 0px 0px;
+}
+
+/* email */
+.email-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px;
+}
+
+.email-wrap > svg {
+    width: 15px;
+    height: 18px;
+}
+.email-wrap > select {
+    width: 100px;
+    height: 100%;
+    border-color: #e3e3e3;
+    border-radius: 5px;
+    font-size: 12px;
+    color: #777;
+    font-weight: 200;
+    font-size: 12px;
+}
+
+/* address */
+.address-detail {
+    margin-top: 3px;
+}
+
+/* 구분선 */
+.edit-form-border-line {
+    border: 1px solid #fff;
+    width: 100%;
+}
+
+/* 버튼 */
+.edit-btn {
+    width: 45%;
+}
+.edit-form-button-wrap {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 50px;
+}
