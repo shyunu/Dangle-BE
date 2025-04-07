@@ -7,6 +7,7 @@ import { PiUserCircleLight } from "react-icons/pi";
 import Accordion from "react-bootstrap/Accordion";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Profile: React.FC = () => {
     const navigation = useNavigate();
@@ -85,10 +86,10 @@ const Profile: React.FC = () => {
             <Accordion defaultActiveKey="0" className="custom-accordion-profile">
                 <Accordion.Item eventKey="0">
                     <Accordion.Header>내 계정</Accordion.Header>
-                    <Accordion.Body>회원정보 수정</Accordion.Body>
-                    <Accordion.Body>비밀번호 변경</Accordion.Body>
+                    <Accordion.Body className="edit-profile-tab" onClick={() => navigation("/confirmEdit")}>회원정보 수정</Accordion.Body>
                     <Accordion.Body>저장한 매장</Accordion.Body>
                     <Accordion.Body>리뷰 관리</Accordion.Body>
+                    <Accordion.Body className="delete-account-tab" onClick={() => navigation("/deleteAccount")}>회원 탈퇴</Accordion.Body>
                 </Accordion.Item>
                 <Accordion.Item eventKey="1">
                     <Accordion.Header>내 반려동물</Accordion.Header>

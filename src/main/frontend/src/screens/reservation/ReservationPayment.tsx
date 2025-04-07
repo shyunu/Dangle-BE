@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../styles/reservation/ReservationPayment.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { FaRegHeart } from "react-icons/fa6";
@@ -9,6 +9,8 @@ const ReservationPayment: React.FC = () => {
   const navigation = useNavigate();
   const location = useLocation();
   const reservationData = location.state; // 넘겨온 예약 정보(날짜,시간,디자이너,메뉴)
+  // const userNo = sessionStorage.getItem("userId");
+  const [selectedPayMethod, setSelectedPayMethod] = useState<string>(""); // 결제수단
 
   return (
     <div className="reservation-payment-container">
@@ -64,9 +66,21 @@ const ReservationPayment: React.FC = () => {
           <div>
             <p>결제방식</p>
             <div className="rv-pay-method">
-              <Button text="신용/체크카드" className="white-button-s pay-btn" />
-              <Button text="카카오페이" className="white-button-s pay-btn" />
-              <Button text="네이버페이" className="white-button-s pay-btn" />
+               <Button
+                 text="신용/체크카드"
+                 className={`white-button-s pay-btn ${selectedPayMethod === "신용/체크카드" ? "selected" : ""}`}
+                 onClick={() => setSelectedPayMethod("신용/체크카드")}
+               />
+               <Button
+                 text="카카오페이"
+                 className={`white-button-s pay-btn ${selectedPayMethod === "카카오페이" ? "selected" : ""}`}
+                 onClick={() => setSelectedPayMethod("카카오페이")}
+               />
+               <Button
+                 text="네이버페이"
+                 className={`white-button-s pay-btn ${selectedPayMethod === "네이버페이" ? "selected" : ""}`}
+                 onClick={() => setSelectedPayMethod("네이버페이")}
+               />
             </div>
             <div className="rv-pay-method2">
               <Button text="무통장입금" className="white-button-s pay-btn" />

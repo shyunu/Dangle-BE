@@ -58,6 +58,14 @@
     height: 40px;
     color: #777;
 }
+.pay-btn:hover {
+    background-color: #fff;
+}
+.pay-btn.selected {
+    background-color: rgba(168, 202, 186, 0.4);
+    color: #000;
+    font-weight: 400;
+}
 .rv-pay-price {
     display: flex;
     flex-direction: row;

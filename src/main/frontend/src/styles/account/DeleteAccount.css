@@ -1,0 +1,153 @@
+.delete-account-container {
+    width: 100%;
+    height: 800px;
+    margin: 80px 0px;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+/* 회원 탈퇴 타이틀 */
+.delete-account-title-wrap {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    z-index: 500;
+    width: 100%;
+    min-width: 320px;
+    max-width: 640px;
+    padding: 10px 30px;
+    background-color: #fff;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.delete-account-title-wrap p {
+    flex: 3;
+    height: 15px;
+    font-size: 20px;
+    line-height: 30px;
+}
+
+/* 회원탈퇴 내용문 */
+.delete-account-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 150px;
+    width: 65%;
+}
+/* 탈퇴소개 txt */
+.delete-account-txt-intro {
+    text-align: left;
+    width: 100%;
+}
+.delete-account-txt-intro p {
+    font-size: 18px;
+    font-weight: 300;
+}
+
+/* 탈퇴이유 txt */
+.delete-account-txt-why {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    text-align: left;
+    gap: 5px;
+}
+.delete-account-txt-why p {
+    margin: 0;
+}
+.delete-account-txt-why p:nth-of-type(2) {
+    color: #777;
+    font-size: 11px;
+    line-height: 22px;
+}
+/* 탈퇴이유 checkbox */
+.delete-account-check-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+.delete-account-check-box > div {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    width: 100%;
+}
+.delete-account-check-box > div > svg,
+.delete-account-check-box > div p {
+    margin: 0;
+    text-align: left;
+    font-size: 15px;
+    line-height: 25px;
+}
+.delete-account-check-box > div > svg {
+    width: 25px;
+    height: 25px;
+}
+.delete-input-wrap {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+}
+.delete-input-wrap > input {
+    width: 100%;
+    border: 1px solid #e3e3e3;
+    border-radius: 5px;
+    height: 30px;
+    outline: none;
+    padding: 0px 5px;
+}
+
+/* deleteAccountConfirm.tsx */
+/* 탈퇴진행 팝업창 */
+.delete-account-confirm-container {
+/* border: 1px solid black; */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    border-radius: 10px;
+    width: 400px;
+    height: 500px;
+    position: fixed;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 30px;
+}
+.delete-account-title {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+}
+.delete-account-title p,
+.delete-account-title svg {
+    margin: 0;
+    font-size: 20px;
+    line-height: 25px;
+    text-align: left;
+}
+.delete-account-title svg {
+    width: 25px;
+    height: 25px;
+}
+/* 재확인 문구 */
+.delete-account-info-txt {
+    margin: 0;
+}
+/* 탈퇴버튼 */
+.delete-account-btn-wrap {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+.delete-account-btn-wrap > .gray-button-s,
+.delete-account-btn-wrap > .green-button-s {
+    width: 50%;
+}
