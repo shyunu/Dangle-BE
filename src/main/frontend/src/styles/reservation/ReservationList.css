@@ -70,6 +70,20 @@
   flex-direction: row;
   justify-content: space-between;
 }
+/* 리뷰작성 */
+.reservation-list-name-status .rv-write-wrap {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  gap: 5px;
+}
+.reservation-list-name-status .rv-write-wrap > p {
+  font-size: 12px;
+  line-height: 23px;
+}
+.reservation-list-name-status .rv-write-wrap > svg:nth-of-type(1) {
+  cursor: pointer;
+}
 .reservation-list-name-status p {
   margin: 0;
   font-size: 18px;
