@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/reservation/ReservationList.css";
 import { FaRegCircleCheck, FaRegCircleXmark } from "react-icons/fa6";
-import { PiSpinnerGap } from "react-icons/pi";
+import { HiOutlinePencilAlt } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import { getRemainingDays } from "../../utils/remainingDate";
 import { formatDate } from "../../utils/formatDate";
@@ -62,6 +62,10 @@ const ReservationList: React.FC = () => {
             }
         });
 
+    const handleReviewWrite = () => {
+        navigation("/reviewForm");
+    };
+
     return (
         <div className="reservation-list-container">
             <p className="reservation-list-title">나의 예약 내역</p>
@@ -83,7 +87,11 @@ const ReservationList: React.FC = () => {
                             ) : reservation.reservationStatusName === "canceled" ? (
                                 <FaRegCircleXmark />
                             ) : reservation.reservationStatusName === "completed" ? (
-                                <FaRegCircleCheck />
+                                <div className="rv-write-wrap">
+                                    <p>리뷰 작성</p>
+                                    <HiOutlinePencilAlt onClick={handleReviewWrite} />
+                                    <FaRegCircleCheck />
+                                </div>
                             ) : (
                                 <></>
                             )}
