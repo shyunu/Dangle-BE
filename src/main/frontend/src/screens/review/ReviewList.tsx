@@ -1,24 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../styles/review/ReviewList.css";
+import "../../styles/common/Common.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { renderStars } from "../../utils/renderStars";
 import Button from "../../components/Button";
+import { FilterReviewSelect } from "../../components/CustomDropdown";
 
 const ReviewList: React.FC = () => {
   const navigation = useNavigate();
+  const [selectedSort, setSelectedSort] = useState<string>("기본정렬순"); // 리뷰내역 정렬기준
+
   return (
-    <div className="review-list-container">
-      <div className="review-list-title-wrap">
+    <div className="page-content">
+      <div className="page-title-bar">
         <IoIosArrowBack onClick={() => navigation(-1)} />
         <p>나의 리뷰 내역</p>
       </div>
       <div className="review-list-wrap">
         <div className="review-list-cnt-filter">
           <p>총 n건</p>
-          <select>
-            <option>최신순</option>
-          </select>
+          <FilterReviewSelect value={selectedSort} onChange={setSelectedSort} />
         </div>
         <div className="review-list-box">
           <div className="review-store-date">

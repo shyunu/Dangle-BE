@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/reservation/ReservationList.css";
+import "../../styles/common/Common.css";
 import { FaRegCircleCheck, FaRegCircleXmark } from "react-icons/fa6";
 import { HiOutlinePencilAlt } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
@@ -67,15 +68,16 @@ const ReservationList: React.FC = () => {
   };
 
   return (
-    <div className="reservation-list-container">
-      <p className="reservation-list-title">나의 예약 내역</p>
-      <div className="store-info-border"></div>
-      <div className="count-filter-wrap">
-        <p>총 {reservationList.length}건</p>
-        <FilterReservationSelect value={selectedSort} onChange={setSelectedSort} />
+    <div className="page-content">
+      <div className="page-title">
+        <p>나의 예약 내역</p>
       </div>
 
       <div className="reservation-list-wrap">
+        <div className="count-filter-wrap">
+          <p>총 {reservationList.length}건</p>
+          <FilterReservationSelect value={selectedSort} onChange={setSelectedSort} />
+        </div>
         {sortedReservations.map((reservation) => (
           <div key={reservation.reservationNo} className="reservation-box">
             <div className="reservation-list-name-status">

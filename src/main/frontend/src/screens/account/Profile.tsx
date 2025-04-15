@@ -82,7 +82,7 @@ const Profile: React.FC = () => {
       <div className="profile-border"></div>
 
       {/* profile accordion */}
-      <Accordion defaultActiveKey="0" className="custom-accordion-profile">
+      <Accordion className="custom-accordion-profile">
         <Accordion.Item eventKey="0">
           <Accordion.Header>내 계정</Accordion.Header>
           <Accordion.Body className="edit-profile-tab" onClick={() => navigation("/confirmEdit")}>

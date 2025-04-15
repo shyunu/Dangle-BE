@@ -1,17 +1,20 @@
 import React from "react";
 import "../../styles/account/ConfirmEdit.css";
+import "../../styles/common/Common.css";
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
+import { IoIosArrowBack } from "react-icons/io";
 
 const ConfirmEdit: React.FC = () => {
   const navigation = useNavigate();
 
   return (
-    <div className="confirm-edit-container">
-      <div className="edit-title-wrap">
+    <div className="page-content">
+      <div className="page-title-bar">
+        <IoIosArrowBack onClick={() => navigation(-1)} />
         <p>회원정보 수정</p>
       </div>
-      <div className="confirm-edit-wrap">
+      <div className="page-body">
         <div className="confirm-edit-text">
           <p>
             소중한 회원님의 정보를 안전하게 보호하기 위해

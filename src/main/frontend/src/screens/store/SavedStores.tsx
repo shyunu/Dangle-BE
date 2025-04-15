@@ -1,26 +1,28 @@
 import React, { useState } from "react";
 import "../../styles/store/SavedStores.css";
+import "../../styles/common/Common.css";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 import { LuMapPin, LuClock4 } from "react-icons/lu";
+import { FilterSavedStoresSelect } from "../../components/CustomDropdown";
 
 const SavedStores: React.FC = () => {
   const navigation = useNavigate();
   const [isSaved, setIsSaved] = useState<boolean>(true);
+  const [selectedSort, setSelectedSort] = useState<string>("기본정렬순"); // 저장매장 정렬기준
+
   return (
-    <div className="saved-stores-container">
-      <div className="saved-stores-title-wrap">
+    <div className="page-content">
+      <div className="page-title-bar">
         <IoIosArrowBack onClick={() => navigation(-1)} />
         <p>저장한 매장</p>
       </div>
       <div className="saved-stores-wrap">
         <div className="saved-stores-cnt-filter">
           <p>n개의 매장</p>
-          <select>
-            <option>최신등록순</option>
-          </select>
+          <FilterSavedStoresSelect value={selectedSort} onChange={setSelectedSort} />
         </div>
         <div className="saved-stores-list-box">
           <div className="saved-stores-image-wrap">

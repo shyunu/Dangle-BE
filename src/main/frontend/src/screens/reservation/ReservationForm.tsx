@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../../styles/reservation/ReservationForm.css";
+import "../../styles/common/Common.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { FaRegHeart } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
@@ -49,14 +50,13 @@ const ReservationForm: React.FC = () => {
   };
 
   return (
-    <div className="reservation-form-container">
-      <div className="store-title-wrap">
+    <div className="page-content">
+      <div className="page-title-bar">
         <IoIosArrowBack onClick={() => navigation(-1)} />
-        <p>미용실이름</p>
-        <FaRegHeart />
+        <p>예약하기</p>
       </div>
       <div className="reservation-form-wrap">
-        <p className="rv-page-title">예약하기</p>
+        <p className="rv-page-title">댕글댕글 1호점</p>
         <div className="rv-date-wrap">
           <p>날짜 선택</p>
           <input

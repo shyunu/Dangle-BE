@@ -1,67 +1,28 @@
-.confirm-edit-container {
-    width: 100%;
-    margin: 80px 0px 100px 0px;
-    padding: 30px;
-    overflow-y: auto; /* 내부 스크롤 활성화 */
-}
-
-.edit-title-wrap {
-    display: flex;
-    flex-direction: row;
-    position: fixed;
-    top: 80px;
-    left: 0;
-    right: 0;
-    z-index: 500;
-    width: 100%;
-    min-width: 320px;
-    max-width: 640px;
-    padding: 10px 30px;
-    background-color: #fff;
-    border-bottom: 1px solid #e3e3e3;
-}
-
-.edit-title-wrap p {
-    flex: 3;
-    height: 15px;
-    font-size: 20px;
-    line-height: 30px;
-}
-
-.confirm-edit-wrap {
-    margin-top: 35px;
-    height: 70vh;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    justify-content: center;
-    align-items: center;
-}
 .confirm-edit-text p {
-    text-align: center;
-    color: #777;
+  text-align: center;
+  color: #777;
 }
 .confirm-edit-text p:nth-of-type(1) {
-    color: #000;
-    font-size: 16px;
-    font-weight: 300;
+  color: #000;
+  font-size: 16px;
+  font-weight: 300;
 }
 .confirm-edit-input-btn input {
-    border: 1px solid #e3e3e3;
-    border-radius: 5px;
-    height: 40px;
-    width: 50%;
-    color: #777;
-    padding: 0px 5px 0px 10px;
-    outline: none;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  height: 40px;
+  width: 82%;
+  color: #777;
+  padding: 0px 5px 0px 10px;
+  outline: none;
 }
 .confirm-edit-input-btn {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-    gap: 40px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  gap: 40px;
 }
 .confirm-edit-input-btn .confirm-btn {
-    width: 50%;
+  width: 82%;
 }
