@@ -6936,6 +6936,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"framer-motion@npm:^12.7.3":
+  version: 12.7.3
+  resolution: "framer-motion@npm:12.7.3"
+  dependencies:
+    motion-dom: ^12.7.3
+    motion-utils: ^12.7.2
+    tslib: ^2.4.0
+  peerDependencies:
+    "@emotion/is-prop-valid": "*"
+    react: ^18.0.0 || ^19.0.0
+    react-dom: ^18.0.0 || ^19.0.0
+  peerDependenciesMeta:
+    "@emotion/is-prop-valid":
+      optional: true
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: fada1b18d9dc4e199b0723dfa84ddc91041bfb1980c69412578bd2507009a8b248ecf833c8a0631e12b859c5bd3a32a273175a204c8d2a1397a5682d276af4ee
+  languageName: node
+  linkType: hard
+
 "fresh@npm:0.5.2":
   version: 0.5.2
   resolution: "fresh@npm:0.5.2"
@@ -6960,6 +6982,7 @@ __metadata:
     axios: ^1.8.1
     bootstrap: ^5.3.3
     eslint: 8.57.0
+    framer-motion: ^12.7.3
     prettier: ^3.5.2
     react: ^19.0.0
     react-bootstrap: ^2.10.9
@@ -9653,6 +9676,22 @@ __metadata:
   bin:
     mkdirp: bin/cmd.js
   checksum: 0c91b721bb12c3f9af4b77ebf73604baf350e64d80df91754dc509491ae93bf238581e59c7188360cec7cb62fc4100959245a42cfe01834efedc5e9d068376c2
+  languageName: node
+  linkType: hard
+
+"motion-dom@npm:^12.7.3":
+  version: 12.7.3
+  resolution: "motion-dom@npm:12.7.3"
+  dependencies:
+    motion-utils: ^12.7.2
+  checksum: 549fa6adf0e98b2343dda6de22437bfa7606fa50c5ae558be8cb6cd3a4e847497c3272604fb923c577e347eb3ec0fb1cbe2956fa87f8a36258403cd141566702
+  languageName: node
+  linkType: hard
+
+"motion-utils@npm:^12.7.2":
+  version: 12.7.2
+  resolution: "motion-utils@npm:12.7.2"
+  checksum: 212b6d6ef8c396deb4a0ec21ae499866d571abfeef3c73db2a4b549b178b7a6f790d721c6724af2d9547a3b9c325e0c24173117e6a1c346d8026dfb42893b460
   languageName: node
   linkType: hard
 
@@ -13378,7 +13417,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.3, tslib@npm:^2.8.0":
+"tslib@npm:^2.0.3, tslib@npm:^2.4.0, tslib@npm:^2.8.0":
   version: 2.8.1
   resolution: "tslib@npm:2.8.1"
   checksum: e4aba30e632b8c8902b47587fd13345e2827fa639e7c3121074d5ee0880723282411a8838f830b55100cbe4517672f84a2472667d355b81e8af165a55dc6203a

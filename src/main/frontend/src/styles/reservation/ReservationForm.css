@@ -1,217 +1,205 @@
-.reservation-form-container {
-    width: 100%;
-    margin: 80px 0px 140px 0px;
-    padding: 30px;
-    overflow-y: auto; /* 내부 스크롤 활성화 */
-}
-
 /* 예약하기 폼 */
 .reservation-form-wrap {
-    margin-top: 30px;
+  margin: 50px 0px 80px 0px;
 }
 .rv-page-title {
-    font-size: 20px;
+  font-size: 20px;
 }
-
-/* date-input placeholder */
-/* input[type="date"]::before {
-  content: attr(data-placeholder);
-} */
 
 /* 날짜 선택 */
 .rv-date-wrap {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 30px;
 }
 .rv-date-wrap > p {
-    margin: 0;
+  margin: 0;
 }
 .rv-date-wrap > input {
-    border: 1px solid #e3e3e3;
-    border-radius: 5px;
-    height: 40px;
-    color: #777;
-    padding: 0px 5px 0px 10px;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  height: 40px;
+  color: #777;
+  padding: 0px 5px 0px 10px;
 }
 
 /* 디자이너 & 시간 */
 .rv-designer-time-wrap {
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
-    margin-bottom: 30px;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  margin-bottom: 30px;
 }
 /* 디자이너 선택 */
 .rv-designer-wrap {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    gap: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap: 5px;
 }
 .rv-designer-wrap p {
-    margin: 0;
+  margin: 0;
 }
 .rv-designer-box {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #e3e3e3;
-    border-radius: 5px;
-    width: 100%;
-    height: 215px;
-    padding: 10px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  width: 100%;
+  height: 215px;
+  padding: 10px;
 }
 .rv-designer-box > div {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    width: 100%;
-    font-size: 14px;
-    color: #777;
-    height: 30px;
-    line-height: 30px;
-    padding-left: 5px;
-    cursor: pointer;
-    margin: 5px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  font-size: 14px;
+  color: #777;
+  height: 30px;
+  line-height: 30px;
+  padding-left: 5px;
+  cursor: pointer;
+  margin: 5px 0px;
 }
 .rv-designer-box > div.selected {
-    color: #000;
-    font-weight: 400;
-    background-color: rgba(168, 202, 186, 0.4);
-    border-radius: 5px;
+  color: #000;
+  font-weight: 400;
+  background-color: rgba(168, 202, 186, 0.4);
+  border-radius: 5px;
 }
 .rv-designer-box > div > svg {
-    width: 20px;
-    height: 20px;
-    margin: 0px 5px 0px 0px;
+  width: 20px;
+  height: 20px;
+  margin: 0px 5px 0px 0px;
 }
 /* 시간 선택 */
 .rv-time-wrap {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    gap: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap: 5px;
 }
 .rv-time-wrap p {
-    margin: 0;
+  margin: 0;
 }
 .rv-time-box {
-    width: 100%;
-    display: flex;
-    height: 215px;
-    flex-direction: column;
-    gap: 10px;
+  width: 100%;
+  display: flex;
+  height: 215px;
+  flex-direction: column;
+  gap: 10px;
 }
 .rv-time-box > input {
-    height: 40px;
-    border: 1px solid #e3e3e3;
-    border-radius: 5px;
-    padding: 0px 0px 0px 10px;
-    outline: none;
+  height: 40px;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  padding: 0px 0px 0px 10px;
+  outline: none;
 }
 .rv-time-box > div {
-    max-height: 165px;
-    overflow-y: auto;
-    border: 1px solid #e3e3e3;
-    border-radius: 5px;
-    width: 100%;
-    padding: 10px;
-    background: #fff;
+  max-height: 165px;
+  overflow-y: auto;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  background: #fff;
 }
 .rv-time-item {
-    margin: 5px 0px;
-    cursor: pointer;
-    height: 30px;
-    line-height: 30px;
-    padding-left: 5px;
-    color: #777;
+  margin: 5px 0px;
+  cursor: pointer;
+  height: 30px;
+  line-height: 30px;
+  padding-left: 5px;
+  color: #777;
 }
 .rv-time-item.selected {
-    background-color: rgba(168, 202, 186, 0.4);
-    border-radius: 5px;
-    color: #000;
-    font-weight: 400;
+  background-color: rgba(168, 202, 186, 0.4);
+  border-radius: 5px;
+  color: #000;
+  font-weight: 400;
 }
 
 /* 메뉴 선택 */
 .rv-menu-wrap {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 30px;
-    height: 200px;
-    gap: 5px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  height: 200px;
+  gap: 5px;
 }
 .rv-menu-wrap > p {
-    margin: 0;
+  margin: 0;
 }
 .rv-category-menu-wrap {
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  width: 100%;
 }
 .rv-menu-category {
-    flex: 1;
-    border: 1px solid #e3e3e3;
-    border-radius: 5px;
-    padding: 10px;
+  flex: 1;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  padding: 10px;
 }
 .rv-menu-category > p {
-    margin: 0px 0px 3px 0px;
-    color: #777;
+  margin: 0px 0px 3px 0px;
+  color: #777;
 }
 .rv-menu-category > div:nth-of-type(1) {
-    border: 1px solid #e3e3e3;
-    height: 1px;
+  border: 1px solid #e3e3e3;
+  height: 1px;
 }
 .rv-menu-category .rv-category-list {
-    max-height: 160px;
-    overflow-y: auto;
+  max-height: 160px;
+  overflow-y: auto;
 }
 .rv-menu-category .rv-category {
-    font-size: 14px;
-    color: #777;
-    height: 30px;
-    line-height: 30px;
-    padding-left: 5px;
-    cursor: pointer;
-    margin: 5px 0px;
+  font-size: 14px;
+  color: #777;
+  height: 30px;
+  line-height: 30px;
+  padding-left: 5px;
+  cursor: pointer;
+  margin: 5px 0px;
 }
 .rv-menu-category .rv-category.selected {
-    background-color: rgba(168, 202, 186, 0.4);
-    border-radius: 5px;
-    color: #000;
-    font-weight: 400;
+  background-color: rgba(168, 202, 186, 0.4);
+  border-radius: 5px;
+  color: #000;
+  font-weight: 400;
 }
 .rv-menu-item {
-    flex: 2;
-    border: 1px solid #e3e3e3;
-    border-radius: 5px;
-    padding: 10px;
+  flex: 2;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  padding: 10px;
 }
 .rv-menu-item > div {
-    padding: 5px;
-    color: #777;
-    cursor: pointer;
-    margin: 5px 0px;
+  padding: 5px;
+  color: #777;
+  cursor: pointer;
+  margin: 5px 0px;
 }
 .rv-menu-item > div.selected {
-    background-color: rgba(168, 202, 186, 0.4);
-    border-radius: 5px;
-    color: #000;
-    font-weight: 400;
+  background-color: rgba(168, 202, 186, 0.4);
+  border-radius: 5px;
+  color: #000;
+  font-weight: 400;
 }
 
 /* 예약버튼 */
 .rv-form-button-wrap {
-    margin-top: 50px;
-    position: fixed;
-    bottom: 90px;
-    left: 0;
-    right: 0;
-    z-index: 500;
-    width: 100%;
-    min-width: 320px;
-    max-width: 640px;
+  margin-top: 50px;
+  position: fixed;
+  bottom: 90px;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  width: 100%;
+  min-width: 320px;
+  max-width: 640px;
 }

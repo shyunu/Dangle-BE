@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../../styles/reservation/ReservationPayment.css";
+import "../../styles/common/Common.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { FaRegHeart } from "react-icons/fa6";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -13,11 +14,10 @@ const ReservationPayment: React.FC = () => {
   const [selectedPayMethod, setSelectedPayMethod] = useState<string>(""); // 결제수단
 
   return (
-    <div className="reservation-payment-container">
-      <div className="store-title-wrap">
+    <div className="page-content">
+      <div className="page-title-bar">
         <IoIosArrowBack onClick={() => navigation(-1)} />
-        <p>미용실이름</p>
-        <FaRegHeart />
+        <p>결제하기</p>
       </div>
       <div className="reservation-payment-wrap">
         <p className="rv-page-title">예약정보</p>
@@ -66,26 +66,38 @@ const ReservationPayment: React.FC = () => {
           <div>
             <p>결제방식</p>
             <div className="rv-pay-method">
-               <Button
-                 text="신용/체크카드"
-                 className={`white-button-s pay-btn ${selectedPayMethod === "신용/체크카드" ? "selected" : ""}`}
-                 onClick={() => setSelectedPayMethod("신용/체크카드")}
-               />
-               <Button
-                 text="카카오페이"
-                 className={`white-button-s pay-btn ${selectedPayMethod === "카카오페이" ? "selected" : ""}`}
-                 onClick={() => setSelectedPayMethod("카카오페이")}
-               />
-               <Button
-                 text="네이버페이"
-                 className={`white-button-s pay-btn ${selectedPayMethod === "네이버페이" ? "selected" : ""}`}
-                 onClick={() => setSelectedPayMethod("네이버페이")}
-               />
+              <Button
+                text="신용/체크카드"
+                className={`white-button-s pay-btn ${selectedPayMethod === "신용/체크카드" ? "selected" : ""}`}
+                onClick={() => setSelectedPayMethod("신용/체크카드")}
+              />
+              <Button
+                text="카카오페이"
+                className={`white-button-s pay-btn ${selectedPayMethod === "카카오페이" ? "selected" : ""}`}
+                onClick={() => setSelectedPayMethod("카카오페이")}
+              />
+              <Button
+                text="네이버페이"
+                className={`white-button-s pay-btn ${selectedPayMethod === "네이버페이" ? "selected" : ""}`}
+                onClick={() => setSelectedPayMethod("네이버페이")}
+              />
             </div>
             <div className="rv-pay-method2">
-              <Button text="무통장입금" className="white-button-s pay-btn" />
-              <Button text="토스페이" className="white-button-s pay-btn" />
-              <Button text="휴대폰 결제" className="white-button-s pay-btn" />
+              <Button
+                text="무통장입금"
+                className={`white-button-s pay-btn ${selectedPayMethod === "무통장입금" ? "selected" : ""}`}
+                onClick={() => setSelectedPayMethod("무통장입금")}
+              />
+              <Button
+                text="토스페이"
+                className={`white-button-s pay-btn ${selectedPayMethod === "토스페이" ? "selected" : ""}`}
+                onClick={() => setSelectedPayMethod("토스페이")}
+              />
+              <Button
+                text="휴대폰 결제"
+                className={`white-button-s pay-btn ${selectedPayMethod === "휴대폰 결제" ? "selected" : ""}`}
+                onClick={() => setSelectedPayMethod("휴대폰 결제")}
+              />
             </div>
           </div>
           <div className="rv-pay-price">

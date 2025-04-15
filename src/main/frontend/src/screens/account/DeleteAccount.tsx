@@ -1,21 +1,26 @@
 import React, { useState } from "react";
 import "../../styles/account/DeleteAccount.css";
+import "../../styles/common/Common.css";
 import { MdOutlineCheckBox, MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
 import Button from "../../components/Button";
 import DeleteAccountConfirm from "./DeleteAccountConfirm";
+import { IoIosArrowBack } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const DeleteAccount: React.FC = () => {
+  const navigation = useNavigate();
   const [showConfirm, setShowConfirm] = useState<boolean>(false); // 탈퇴재확인 팝업창
   const handleContinueClick = () => {
     setShowConfirm(true);
   };
 
   return (
-    <div className="delete-account-container">
-      <div className="delete-account-title-wrap">
+    <div className="page-content">
+      <div className="page-title-bar">
+        <IoIosArrowBack onClick={() => navigation(-1)} />
         <p>회원 탈퇴</p>
       </div>
-      <div className="delete-account-wrap">
+      <div className="page-body">
         <div className="delete-account-txt-intro">
           <p>OO님,</p>
           <p>그동안 댕글댕글과 함께해주셔서 고마웠어요!</p>

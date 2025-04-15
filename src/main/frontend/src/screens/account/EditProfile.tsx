@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import "../../styles/account/EditProfile.css";
+import "../../styles/common/Common.css";
 import Button from "../../components/Button";
+import { IoIosArrowBack } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const EditProfile: React.FC = () => {
+  const navigation = useNavigate();
   const [editPw, setEditPw] = useState<boolean>(false); // 비밀번호 변경 유무
   const [editPhone, setEditPhone] = useState<boolean>(false); // 연락처 변경 유무
   const [editEmail, setEditEmail] = useState<boolean>(false); // 이메일 변경 유무
@@ -29,11 +33,12 @@ const EditProfile: React.FC = () => {
   };
 
   return (
-    <div className="edit-profile-container">
-      <div className="edit-title-wrap">
+    <div className="page-content">
+      <div className="page-title-bar">
+        <IoIosArrowBack onClick={() => navigation(-1)} />
         <p>회원정보 수정</p>
       </div>
-      <div className="edit-profile-wrap">
+      <div className="page-body edit-profile-wrap">
         <p>아이디</p>
         <div className="edit-form-input-wrap">
           <input type="text" name="userId" />
@@ -102,10 +107,10 @@ const EditProfile: React.FC = () => {
         <div className="edit-form-input-wrap address-detail">
           <input type="text" name="addressDetail" placeholder="A동 B호" disabled />
         </div>
-      </div>
-      <div className="join-form-button-wrap">
-        <Button text="이전" className="gray-button-m" />
-        <Button text="완료" className="green-button-m" type="submit" />
+        <div className="edit-form-button-wrap">
+          <Button text="이전" className="gray-button-m" />
+          <Button text="완료" className="green-button-m" type="submit" />
+        </div>
       </div>
     </div>
   );
