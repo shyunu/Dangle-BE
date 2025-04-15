@@ -110,6 +110,8 @@
 
 /* 회원정보 수정 */
 .edit-profile-tab,
-.delete-account-tab {
+.saved-stores-tab,
+.delete-account-tab,
+.myReview-list-tab {
   cursor: pointer;
 }

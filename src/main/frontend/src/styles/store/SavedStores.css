@@ -1,0 +1,159 @@
+.saved-stores-container {
+  width: 100%;
+  height: 800px;
+  margin: 80px 0px;
+  padding: 30px;
+  overflow-y: auto;
+}
+/* 페이지이름(p) + 뒤로가기(svg) */
+.saved-stores-title-wrap {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  top: 80px;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  width: 100%;
+  min-width: 320px;
+  max-width: 640px;
+  padding: 10px 30px;
+  background-color: #fff;
+  border-bottom: 1px solid #e3e3e3;
+  gap: 10px;
+}
+.saved-stores-title-wrap svg {
+  margin: 0;
+  width: 35px;
+  height: 100%;
+  cursor: pointer;
+  z-index: 1000;
+}
+.saved-stores-title-wrap p {
+  flex: 3;
+  margin: 0;
+  font-size: 20px;
+  line-height: 35px;
+}
+/* 저장매장내역 */
+.saved-stores-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 60px;
+  width: 95%;
+}
+/* 매장개수 + 필터링 */
+.saved-stores-cnt-filter {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.saved-stores-cnt-filter p {
+  margin: 0;
+  font-size: 14px;
+}
+.saved-stores-cnt-filter select {
+  width: 20%;
+}
+/* 저장매장박스 */
+.saved-stores-list-box {
+  width: 100%;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.saved-stores-list-box:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+/* 저장매장 이미지 */
+.saved-stores-image-wrap {
+  width: 35%;
+}
+.saved-stores-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+/* 저장매장 정보 */
+.saved-stores-info-wrap {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.saved-stores-info-wrap p,
+.saved-stores-info-wrap svg {
+  margin: 0;
+}
+/* -- 매장이름,하트 */
+.saved-stores-info-wrap > .store-name-heart {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.saved-stores-info-wrap > .store-name-heart > p {
+  font-size: 15px;
+  font-weight: 300;
+}
+.saved-stores-info-wrap > .store-name-heart > svg {
+  width: 22px;
+  height: 22px;
+  color: #e78a99;
+}
+/* 리뷰 - 평점, 개수 */
+.saved-stores-info-wrap > .review {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.saved-stores-info-wrap > .review > svg {
+  color: #ffb703;
+  width: 20px;
+  height: 20px;
+}
+.saved-stores-info-wrap > .review > p {
+  font-size: 13px;
+  line-height: 20px;
+  margin-left: 2px;
+}
+.saved-stores-info-wrap > .review > p:nth-of-type(2) {
+  color: #777;
+}
+/* 지도, 시간 */
+.saved-stores-info-wrap > .map,
+.saved-stores-info-wrap > .time {
+  width: 100%;
+  display: flex;
+  color: #777;
+}
+.saved-stores-info-wrap > .map > svg {
+  width: 20px;
+  height: 20px;
+}
+.saved-stores-info-wrap > .map > p {
+  line-height: 20px;
+}
+
+.saved-stores-info-wrap > .time > svg {
+  width: 20px;
+  height: 18px;
+}
+.saved-stores-info-wrap > .time > p {
+  line-height: 18px;
+}
+/* 예약횟수 */
+.saved-stores-info-wrap > .rv-cnt {
+  width: 100%;
+  text-align: right;
+  color: #777;
+  margin-top: 15px;
+}
