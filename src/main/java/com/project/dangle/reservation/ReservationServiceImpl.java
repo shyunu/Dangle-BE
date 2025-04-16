@@ -14,8 +14,8 @@ public class ReservationServiceImpl implements ReservationService {
 
     // 예약내역조회
     @Override
-    public List<ReservationVO> getReservationList(String userId) {
-        List<ReservationVO> list = reservationMapper.getReservationList(userId);
+    public List<ReservationVO> getReservationList(Integer userNo) {
+        List<ReservationVO> list = reservationMapper.getReservationList(userNo);
         return list;
     }
 }

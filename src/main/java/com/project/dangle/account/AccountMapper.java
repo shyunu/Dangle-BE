@@ -15,6 +15,7 @@ public interface AccountMapper {
     String findIdByNameAndPhone(@Param("userName") String userName, @Param("userPhone") String userPhone); // 아이디 찾기(2) - 이름/전화번호로 찾기
     int findAccountForPw(@Param("userId") String userId, @Param("userPhone") String userPhone); // 계정조회 (비밀번호 찾기 - 아이디/전화번호로 찾기)
     void updatePassword(AccountVO vo); // 비밀번호 변경
-    List<String> getProfile(String userId); // 로그인한 계정정보 조회
+    List<Integer> getProfile(Integer userNo); // 로그인한 계정정보 조회
+    Integer getUserNoByUserId(String userId); // 회원아이디로 회원번호 조회
 
 }

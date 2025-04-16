@@ -70,8 +70,15 @@
     </update>
 
     <!-- 로그인한 계정정보 조회 -->
-    <select id="getProfile" parameterType="string" resultType="string">
+    <select id="getProfile" parameterType="integer" resultType="integer">
         SELECT USER_NAME
+        FROM USERS
+        WHERE USER_NO = #{userNo}
+    </select>
+    
+    <!-- 회원아이디로 회원번호 조회 -->
+    <select id="getUserNoByUserId" parameterType="string" resultType="int">
+        SELECT USER_NO
         FROM USERS
         WHERE USER_ID = #{userId}
     </select>

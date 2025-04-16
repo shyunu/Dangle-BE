@@ -19,8 +19,8 @@ public class ReservationController {
 
     // 예약내역조회
     @GetMapping("/list")
-    public List<ReservationVO> getReservationList(@RequestParam("userId") String userId) {
-        List<ReservationVO> list = reservationService.getReservationList(userId);
+    public List<ReservationVO> getReservationList(@RequestParam("userNo") Integer userNo) {
+        List<ReservationVO> list = reservationService.getReservationList(userNo);
         return list;
     }
 

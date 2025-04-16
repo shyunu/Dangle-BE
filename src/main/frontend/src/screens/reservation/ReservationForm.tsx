@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "../../styles/reservation/ReservationForm.css";
 import "../../styles/common/Common.css";
 import { IoIosArrowBack } from "react-icons/io";
-import { FaRegHeart } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 

@@ -20,12 +20,12 @@ const Login: React.FC = () => {
       try {
         const response = await axios.post("/account/login", { userId, userPw });
 
-        if (response.data === "로그인 성공") {
-          sessionStorage.setItem("userId", userId);
+        if (typeof response.data === "number") {
+          sessionStorage.setItem("userNo", response.data.toString());
           const redirectTo = location.state?.from || "/home";
           navigation(redirectTo);
         } else {
-          alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+          alert(response.data);
         }
       } catch (error) {
         console.error("로그인 요청 중 오류 발생:", error);

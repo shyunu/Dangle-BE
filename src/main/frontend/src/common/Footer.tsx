@@ -8,27 +8,27 @@ import { RiAccountCircleLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
-    const userId = sessionStorage.getItem("userId");
+  const userNo = Number(sessionStorage.getItem("userNo"));
 
-    return (
-        <div className="footerContainer">
-            <div className="tabContainer">
-                <Link to={"/home"}>
-                    <BiHome className="home" />
-                </Link>
+  return (
+    <div className="footerContainer">
+      <div className="tabContainer">
+        <Link to={"/home"}>
+          <BiHome className="home" />
+        </Link>
 
-                <Link to={"/searchStore"}>
-                    <IoSearchSharp className="search" />
-                </Link>
-                <Link to={userId ? "/reservationList" : "/login"}>
-                    <FaRegCalendarCheck className="calendar" />
-                </Link>
-                <Link to="/profile">
-                    <RiAccountCircleLine className="account" />
-                </Link>
-            </div>
-        </div>
-    );
+        <Link to={"/searchStore"}>
+          <IoSearchSharp className="search" />
+        </Link>
+        <Link to={userNo ? "/reservationList" : "/login"}>
+          <FaRegCalendarCheck className="calendar" />
+        </Link>
+        <Link to="/profile">
+          <RiAccountCircleLine className="account" />
+        </Link>
+      </div>
+    </div>
+  );
 };
 
 export default Footer;

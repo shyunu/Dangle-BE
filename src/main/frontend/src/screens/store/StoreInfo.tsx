@@ -36,7 +36,7 @@ const StoreInfo: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedDesigner, setSelectedDesigner] = useState<number | null>(null);
   const [isSavedStore, setIsSavedStore] = useState<boolean>(false); // 저장된 매장인지 여부(찜)
-  const userId = sessionStorage.getItem("userId"); // 로그인된 사용자아이디
+  const userNo = Number(sessionStorage.getItem("userNo")); // 로그인된 사용자아이디
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
@@ -131,7 +131,7 @@ const StoreInfo: React.FC = () => {
 
   // 예약하기 버튼
   const handleReservation = () => {
-    if (userId) {
+    if (userNo) {
       navigation("/reservationForm");
     } else {
       navigation("/login", { state: { from: "/reservationForm" } });
