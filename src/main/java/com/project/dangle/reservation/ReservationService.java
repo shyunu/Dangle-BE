@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface ReservationService {
 
-    List<ReservationVO> getReservationList(String userId); // 예약내역조회
+    List<ReservationVO> getReservationList(Integer userNo); // 예약내역조회
 
 }

@@ -8,6 +8,6 @@ import java.util.List;
 @Mapper
 public interface ReservationMapper {
 
-    List<ReservationVO> getReservationList(String userId); // 예약내역조회
+    List<ReservationVO> getReservationList(Integer userNo); // 예약내역조회
 
 }

@@ -12,25 +12,33 @@ import { PiSpinnerGap } from "react-icons/pi";
 
 const ReservationList: React.FC = () => {
   const navigation = useNavigate();
-  const userId = sessionStorage.getItem("userId");
+  const [userNo, setUserNo] = useState<number | null>(0);
   const [selectedSort, setSelectedSort] = useState<string>("기본정렬순"); // 예약내역 정렬기준
+
+  useEffect(() => {
+    const loggedUserNo = sessionStorage.getItem("userNo");
+    setUserNo(loggedUserNo !== null ? Number(loggedUserNo) : null);
+    console.log(userNo);
+  }, []);
 
   // 예약내역 list
   const [reservationList, setReservationList] = useState<Reservation[]>([]);
   useEffect(() => {
-    axios
-      .get<Reservation[]>("/reservation/list", { params: { userId } })
-      .then((response) => {
-        if (Array.isArray(response.data)) {
-          setReservationList(response.data);
-        } else {
-          console.error("예상치 못한 응답 구조입니다(예약내역)");
-        }
-      })
-      .catch((error) => {
-        console.error("예약내역 조회 에러: ", error);
-      });
-  }, []);
+    if (userNo) {
+      axios
+        .get<Reservation[]>("/reservation/list", { params: { userNo } })
+        .then((response) => {
+          if (Array.isArray(response.data)) {
+            setReservationList(response.data);
+          } else {
+            console.error("예상치 못한 응답 구조입니다(예약내역)");
+          }
+        })
+        .catch((error) => {
+          console.error("예약내역 조회 에러: ", error);
+        });
+    }
+  }, [userNo]);
 
   // 상세보기 버튼
   const handleReservationClick = (reservation: Reservation) => {

@@ -19,6 +19,12 @@ public class AccountServiceImpl implements AccountService {
         return count > 0;
     }
 
+    // 회원아이디로 회원번호 조회
+    @Override
+    public Integer getUserNoByUserId(String userId) {
+        return accountMapper.getUserNoByUserId(userId);
+    }
+
     // 회원가입
     @Override
     public void joinForm(AccountVO vo) {
@@ -57,8 +63,8 @@ public class AccountServiceImpl implements AccountService {
 
     // 로그인한 계정정보 조회
     @Override
-    public List<String> getProfile(String userId) {
-        List<String> list = accountMapper.getProfile(userId);
+    public List<Integer> getProfile(Integer userNo) {
+        List<Integer> list = accountMapper.getProfile(userNo);
         return list;
     }
 }

@@ -10,22 +10,24 @@ import axios from "axios";
 
 const Profile: React.FC = () => {
   const navigation = useNavigate();
-  const [userId, setUserId] = useState<string>("");
+  const [userNo, setUserNo] = useState<number | null>(0);
+
   useEffect(() => {
-    setUserId(sessionStorage.getItem("userId"));
+    const loggedUserNo = sessionStorage.getItem("userNo");
+    setUserNo(loggedUserNo !== null ? Number(loggedUserNo) : null);
   }, []);
 
   const handleLogout = () => {
-    sessionStorage.removeItem("userId");
-    setUserId(null);
+    sessionStorage.removeItem("userNo");
+    setUserNo(0);
     navigation("/profile");
   };
 
   const [userName, setUserName] = useState<string | null>("");
   useEffect(() => {
-    if (userId) {
+    if (userNo) {
       axios
-        .get("/account/profile", { params: { userId } })
+        .get("/account/profile", { params: { userNo } })
         .then((response) => {
           if (response.data) {
             setUserName(response.data);
@@ -37,19 +39,19 @@ const Profile: React.FC = () => {
           console.error("프로필 정보 조회 에러: ", error);
         });
     }
-  }, [userId]);
+  }, [userNo]);
 
   return (
     <div className="profile-mypage-container">
       <p className="profile-mypage-title">마이페이지</p>
       <div className="profile-border"></div>
       <div className="profile-image-wrap">
-        {userId ? (
+        {userNo ? (
           <>
             <img src="./image/profile1.jpg" alt="profile-img" />
             <div className="profile-name">
               <div className="profile-name-bold">
-                <p>{userName}</p>
+                <p>{userNo}</p>
                 <p>님</p>
               </div>
               <div className="profile-intro-comment">
