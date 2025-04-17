@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/reservation/ReservationForm.css";
 import "../../styles/common/Common.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
+import { generateTimeTable } from "../../utils/generateTimeTable";
 
 const ReservationForm: React.FC = () => {
   const navigation = useNavigate();
@@ -15,18 +16,15 @@ const ReservationForm: React.FC = () => {
 
   // 임시데이터 (디자이너, 시간, 카테고리, 메뉴명)
   const designerList = ["원장 김수현 (경력 8년)", "디자이너 강해린 (경력 3년)", "디자이너 김민지 (경력 2년)"];
-  const timeList = [
-    "오전 09:00",
-    "오전 10:00",
-    "오전 11:00",
-    "오후 12:00",
-    "오후 1:00",
-    "오후 2:00",
-    "오후 3:00",
-    "오후 4:00",
-    "오후 5:00",
-    "오후 6:00",
-  ];
+  const [timeList, setTimeList] = useState<string[]>([]);
+
+  useEffect(() => {
+    const openTime = "09:00";
+    const closeTime = "18:00";
+    const timeTable = generateTimeTable(openTime, closeTime);
+    setTimeList(timeTable);
+  }, []);
+
   const categoryList = ["목욕", "위생+목욕", "전체클리핑", "스포팅", "가위컷", "얼굴컷 추가"];
   const menuList = ["기본얼굴컷", "스타일컷", "특수컷"];
 

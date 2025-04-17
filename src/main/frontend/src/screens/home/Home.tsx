@@ -12,12 +12,9 @@ interface EventBanner {
   imageUrl: string;
 }
 const eventImage: EventBanner[] = [
-  { no: 1, imageUrl: "/image/slide5.jpg" },
-  { no: 2, imageUrl: "/image/slide2.jpg" },
-  { no: 3, imageUrl: "/image/slide3.jpg" },
-  { no: 4, imageUrl: "/image/slide4.jpg" },
-  { no: 5, imageUrl: "/image/slide1.jpg" },
-  { no: 6, imageUrl: "/image/slide6.jpg" },
+  { no: 1, imageUrl: "/image/eventBanner/event-timeSale.png" },
+  { no: 2, imageUrl: "/image/eventBanner/event-firstReservation.png" },
+  { no: 3, imageUrl: "/image/eventBanner/event-randomCoupon.png" },
 ];
 
 const Home: React.FC = () => {
